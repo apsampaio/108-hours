@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import backgroundImg from "../../assets/background.svg";
+import backgroundImg from "../../assets/background-blue.svg";
 
 export const Container = styled.div`
   width: 100vw;
@@ -51,7 +51,10 @@ export const Content = styled.div`
   align-items: center;
 
   flex-direction: column;
+
   form {
+    margin-top: 114px;
+
     display: flex;
     flex-direction: column;
     min-width: 352px;
@@ -59,69 +62,32 @@ export const Content = styled.div`
     h1 {
       color: #32264d;
       font-size: 36px;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
-    label {
-      display: flex;
-      align-items: center;
-      color: #9c98a6;
-      font-size: 16px;
-      margin-top: 24px;
-      cursor: pointer;
+    p {
+      color: #333333;
+      font-size: 18px;
+      font-family: "Roboto";
+      width: 250px;
+      margin-bottom: 40px;
 
-      svg {
-        position: absolute;
-      }
-
-      input {
-        border: 1px solid #e6e6f0;
-        padding: 0;
-        appearance: none;
-
-        width: 24px;
-        height: 24px;
-        margin-right: 16px;
-        border-radius: 8px;
-        background-color: #fafafc;
-      }
-
-      input:hover {
-        cursor: pointer;
-      }
-
-      input:checked {
-        background: #4a2787;
-        border: 1px solid #4a2787;
-      }
+      line-height: 26px;
     }
 
     button {
-      background: #dcdce6;
+      background: #4a2787;
       border-radius: 8px;
       height: 56px;
 
-      font-weight: bold;
+      font-weight: 500;
       font-size: 18px;
       letter-spacing: 1px;
-      color: #9c98a6;
+      color: #fff;
 
       border: 0;
       margin-top: 40px;
       margin-bottom: 128px;
-    }
-  }
-
-  p {
-    color: #333333;
-    font-size: 18px;
-    font-family: Poppins;
-
-    align-self: auto;
-
-    a {
-      font-weight: bold;
-      color: #ca53d7;
     }
   }
 `;

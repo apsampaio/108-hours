@@ -1,11 +1,16 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { HiCheck } from "react-icons/hi";
+
+import Input from "../../components/Input";
 
 import { Container, Banner, Content, PasswordInputContainer } from "./styles";
 
 const Login: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [remindme, setRemindme] = useState(false);
+
   return (
     <Container>
       <Banner>
@@ -17,7 +22,7 @@ const Login: React.FC = () => {
       <Content>
         <form>
           <h1>Fazer login</h1>
-          <input type="email" placeholder="E-mail" />
+          <Input placeholder="E-mail" name="email" />
           <PasswordInputContainer>
             <input
               type={passwordVisible ? "text" : "password"}
@@ -38,7 +43,12 @@ const Login: React.FC = () => {
             )}
           </PasswordInputContainer>
           <label>
-            <input type="checkbox" />
+            {remindme && <HiCheck size={24} color="#fff" />}
+            <input
+              checked={remindme}
+              type="checkbox"
+              onChange={() => setRemindme(!remindme)}
+            />
             Lembrar-me
           </label>
           <button>Entrar</button>
