@@ -10,10 +10,9 @@ export const Container = styled.div`
 `;
 
 export const Banner = styled.div`
-  background: rgba(202, 83, 215, 0.5) url(${backgroundImg});
+  background: rgba(202, 83, 215, 0.5);
 
   display: flex;
-
   justify-content: center;
   align-items: center;
 

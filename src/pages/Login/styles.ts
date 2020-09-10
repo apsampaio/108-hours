@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import backgroundImg from "../../assets/background.svg";
-
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -10,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const Banner = styled.div`
-  background: rgba(202, 83, 215, 0.5) url(${backgroundImg});
+  background: rgba(202, 83, 215, 0.5);
 
   display: flex;
 
