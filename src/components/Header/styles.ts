@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background: rgba(202, 83, 215, 0.5);
-  min-height: 120px;
+  min-height: 100px;
   flex-grow: 0;
 
   display: flex;
@@ -41,7 +41,7 @@ export const Dropdown = styled.section`
   position: relative;
   display: inline-block;
   min-width: 300px;
-  min-height: 120px;
+  min-height: 100px;
   flex: 0;
 
   div {
@@ -50,7 +50,7 @@ export const Dropdown = styled.section`
     align-items: center;
     justify-content: center;
 
-    padding-top: 40px;
+    padding-top: 20px;
 
     span {
       padding: 15px 20px 15px 20px;
