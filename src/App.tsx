@@ -7,12 +7,13 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import MySchedules from "./pages/MySchedules";
+import EventDate from "./pages/EventDate";
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <MySchedules />
+      <EventDate />
     </>
   );
 }
