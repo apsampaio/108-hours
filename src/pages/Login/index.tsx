@@ -1,22 +1,25 @@
 import React, { useCallback, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Form } from "@unform/web";
-
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { HiCheck } from "react-icons/hi";
+import { FormHandles } from "@unform/core";
+
+import { useAuth } from "../../hooks/Auth";
 
 import Input from "../../components/Input";
 
 import { Container, Banner, Content, Button } from "./styles";
-import { FormHandles } from "@unform/core";
 
 const Login: React.FC = () => {
+  const { signIn } = useAuth()
   const formRef = useRef<FormHandles>(null)
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [remindme, setRemindme] = useState(false);
 
-  const handleSubmit = useCallback(({ email, password }) => {
-   console.log('Authenticate!')
+  const handleSubmit = useCallback(async ({ email, password }) => {
+    console.log('Authenticate!')
+    await signIn({ email, password })
   }, [])
 
 
