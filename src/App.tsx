@@ -1,20 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import GlobalStyles from "./styles/global";
+import GlobalStyles from './styles/global';
 
-import Landing from "./pages/Landing";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import Home from "./pages/Home";
-import MySchedules from "./pages/MySchedules";
-import EventDate from "./pages/EventDate";
-//test
+
+import Routes from './routes';
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <EventDate />
+      <Routes />
     </>
   );
 }

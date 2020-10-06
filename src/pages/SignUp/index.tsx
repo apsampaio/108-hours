@@ -2,19 +2,21 @@ import React, { useState } from "react";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FiArrowLeft } from "react-icons/fi";
+import { useHistory } from "react-router-dom";
 
 import Input from "../../components/Input";
 
 import { Container, Banner, Content, PasswordInputContainer } from "./styles";
 
 const SignUp: React.FC = () => {
+  const history = useHistory()
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
     <Container>
       <Content>
         <div>
-          <FiArrowLeft size={28} color="#CA53D7" />
+          <FiArrowLeft onClick={() => {history.goBack()}} size={28} color="#CA53D7" />
 
           <form>
             <h1>Cadastro</h1>

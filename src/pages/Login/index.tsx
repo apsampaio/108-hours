@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { HiCheck } from "react-icons/hi";
 
 import Input from "../../components/Input";
 
-import { Container, Banner, Content, PasswordInputContainer } from "./styles";
+import { Container, Banner, Content, PasswordInputContainer, Button } from "./styles";
 
 const Login: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -35,12 +36,12 @@ const Login: React.FC = () => {
                 size={24}
               />
             ) : (
-              <FiEye
-                onClick={() => setPasswordVisible(!passwordVisible)}
-                color="#9C98A6"
-                size={24}
-              />
-            )}
+                <FiEye
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                  color="#9C98A6"
+                  size={24}
+                />
+              )}
           </PasswordInputContainer>
           <label>
             {remindme && <HiCheck size={24} color="#fff" />}
@@ -51,9 +52,9 @@ const Login: React.FC = () => {
             />
             Lembrar-me
           </label>
-          <button>Entrar</button>
+          <Button to='/profile'>Entrar</Button>
           <p>
-            Não tem conta? <a href="/">Cadastre-se</a>
+            Não tem conta? <Link to="/signup">Cadastre-se</Link>
           </p>
         </form>
       </Content>

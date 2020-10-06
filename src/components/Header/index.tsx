@@ -3,13 +3,14 @@ import React from "react";
 import { Container, Menu, Dropdown } from "./styles";
 
 import { FiChevronDown } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
     <Container>
       <Menu>
-        <a>Horários</a>
-        <a>Quem somos</a>
+        <Link to='/schedule'>Horários</Link>
+        <Link to='/aboutus'>Quem somos</Link>
       </Menu>
       <Dropdown>
         <div>

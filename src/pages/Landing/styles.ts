@@ -68,7 +68,7 @@ export const Footer = styled.div`
     margin-top: 16px;
   }
 
-  button {
+  a {
     padding: 39px 91px;
     background: #4a2787;
     border-radius: 8px;
@@ -79,9 +79,10 @@ export const Footer = styled.div`
     font-family: "Archivo", sans-serif;
     border: none;
     margin-left: 32px;
+    text-decoration:none;
   }
 
-  button + button {
+  a + a {
     padding: 39px 91px;
     background: #ca53d7;
   }

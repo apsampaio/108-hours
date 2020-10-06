@@ -24,6 +24,7 @@ export const Menu = styled.div`
     font-weight: 500;
     font-size: 20px;
     border-bottom: 5px solid transparent;
+    text-decoration:none;
   }
 
   a:hover {

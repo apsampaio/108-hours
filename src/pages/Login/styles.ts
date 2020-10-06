@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -92,22 +93,7 @@ export const Content = styled.div`
         background: #4a2787;
         border: 1px solid #4a2787;
       }
-    }
-
-    button {
-      background: #dcdce6;
-      border-radius: 8px;
-      height: 56px;
-
-      font-weight: bold;
-      font-size: 18px;
-      letter-spacing: 1px;
-      color: #9c98a6;
-
-      border: 0;
-      margin-top: 40px;
-      margin-bottom: 128px;
-    }
+    }    
   }
 
   p {
@@ -149,3 +135,22 @@ export const PasswordInputContainer = styled.div`
     margin-left: 16px;
   }
 `;
+
+export const Button = styled(Link)`
+  background: #dcdce6;
+  border-radius: 8px;
+  height: 56px;
+
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #9c98a6;
+
+  border: 0;
+  margin-top: 40px;
+  margin-bottom: 128px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+`
