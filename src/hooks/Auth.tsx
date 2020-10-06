@@ -24,11 +24,13 @@ const AuthProvider: React.FC = ({ children }) => {
 
     const signIn = useCallback(async ({ email, password }) => {
         api.post('sessions', { email, password }).then(({ data }) => {
-            console.log(data)
+            setData(data)
         }).catch(() => {
             console.log("Error when authenticating")
         })
     }, [])
+
+
     return (
         <AuthContext.Provider value={{ user: data.user, signIn }}>
             {children}
