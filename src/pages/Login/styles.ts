@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   width: 100vw;
@@ -110,41 +109,42 @@ export const Content = styled.div`
   }
 `;
 
-export const PasswordInputContainer = styled.div`
-  background: #fafafc;
-  padding: 24px;
-  border: 1px solid #e6e6f0;
-  border-radius: 0px 0px 8px 8px;
-  color: #333333;
-  display: flex;
-  align-items: center;
+// export const PasswordInputContainer = styled.div`
+//   background: #fafafc;
+//   padding: 24px;
+//   border: 1px solid #e6e6f0;
+//   border-radius: 0px 0px 8px 8px;
+//   color: #333333;
+//   display: flex;
+//   align-items: center;
 
-  input {
-    font-size: 16px;
-    color: #333333;
-    flex: 1;
-    background: transparent;
-    border: 0;
-  }
+//   input {
+//     font-size: 16px;
+//     color: #333333;
+//     flex: 1;
+//     background: transparent;
+//     border: 0;
+//   }
 
-  input::-webkit-input-placeholder {
-    color: #9c98a6;
-  }
+//   input::-webkit-input-placeholder {
+//     color: #9c98a6;
+//   }
 
-  svg {
-    margin-left: 16px;
-  }
-`;
+//   svg {
+//     margin-left: 16px;
+//     cursor: pointer;
+//   }
+// `;
 
-export const Button = styled(Link)`
-  background: #dcdce6;
+export const Button = styled.button`
+  background: #4A2787;
   border-radius: 8px;
   height: 56px;
 
   font-weight: bold;
   font-size: 18px;
   letter-spacing: 1px;
-  color: #9c98a6;
+  color: #fff;
 
   border: 0;
   margin-top: 40px;

@@ -16,14 +16,13 @@ const SignUp: React.FC = () => {
     <Container>
       <Content>
         <div>
-          <FiArrowLeft onClick={() => {history.goBack()}} size={28} color="#CA53D7" />
+          <FiArrowLeft onClick={() => { history.goBack() }} size={28} color="#CA53D7" />
 
           <form>
             <h1>Cadastro</h1>
             <p>Preencha os dados abaixo para começar.</p>
-            <Input placeholder="Nome" />
-            <Input placeholder="Sobrenome" />
-            <Input placeholder="E-mail" />
+            <Input name='name' placeholder="Nome" />
+            <Input name='email'placeholder="E-mail" />
             <PasswordInputContainer>
               <input
                 type={passwordVisible ? "text" : "password"}
@@ -36,12 +35,12 @@ const SignUp: React.FC = () => {
                   size={24}
                 />
               ) : (
-                <FiEye
-                  onClick={() => setPasswordVisible(!passwordVisible)}
-                  color="#9C98A6"
-                  size={24}
-                />
-              )}
+                  <FiEye
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                    color="#9C98A6"
+                    size={24}
+                  />
+                )}
             </PasswordInputContainer>
             <button>Concluir cadastro</button>
           </form>

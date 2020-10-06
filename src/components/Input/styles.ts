@@ -49,4 +49,9 @@ export const Container = styled.div<ContainerProps>`
   input::-webkit-input-placeholder {
     color: #9c98a6;
   }
+
+  svg {
+    margin-left: 16px;
+    cursor: pointer;
+  }
 `;
