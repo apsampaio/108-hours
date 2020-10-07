@@ -12,6 +12,12 @@ interface IAuthContextData {
     signOut(): Promise<void>;
 }
 
+export interface IAppointment {
+    id: string;
+    user_id: string;
+    date: string;
+}
+
 interface IUserProps {
     id: string,
     name: string,
@@ -24,6 +30,7 @@ interface IUserProps {
     avatar: string,
     created_at: Date,
     updated_at: Date,
+    appointments: IAppointment[]
 }
 
 interface IAuthState {

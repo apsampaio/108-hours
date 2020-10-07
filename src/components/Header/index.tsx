@@ -27,10 +27,10 @@ const Header: React.FC = () => {
         </div>
 
         <div>
-          <a>Meus horários</a>
-          {user.isAdmin && (
+          <Link to='/profile'>Meus horários</Link>
 
-          <a>Configuração de adm.</a>
+          {user.isAdmin && (
+            <Link to='/admin/event-date'>Configuração de adm.</Link>
           )}
           <a onClick={signOut}>Sair</a>
         </div>

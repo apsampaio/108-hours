@@ -20,7 +20,7 @@ const Login: React.FC = () => {
   const handleSubmit = useCallback(async ({ email, password }) => {
     console.log('Authenticate!')
     await signIn({ email, password })
-  }, [])
+  }, [signIn])
 
 
 

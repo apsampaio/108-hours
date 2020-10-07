@@ -4,12 +4,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  top: 0;
+  /* top: 0;
   right: 0;
   left: 0;
-  bottom: 0;
+  bottom: 0; */
 
-  background: #f0f0f7;
+  background-color: #f0f0f7;
 `;
 
 export const Content = styled.div`
@@ -24,7 +24,7 @@ export const Content = styled.div`
   min-width: 736px;
   min-height: 550px;
 
-  background: #fff;
+  background-color: #fff;
   align-self: center;
 
   display: flex;
@@ -35,10 +35,11 @@ export const Content = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    max-height: 90px;
+    /* max-height: 90px; */
 
     border-bottom: 1px solid rgba(202, 83, 215, 0.5);
     padding-bottom: 20px;
+    margin-bottom: 40px;
 
     strong {
       color: #32264d;
@@ -55,6 +56,7 @@ export const Content = styled.div`
 
       font-weight: bold;
       color: #8257e5;
+      text-decoration:none;
     }
   }
 
@@ -83,3 +85,25 @@ export const Content = styled.div`
     color: #333333;
   }
 `;
+
+export const List = styled.main`
+`
+
+export const EachDay = styled.ul`
+  margin: 24px 64px;
+
+
+`
+
+export const EachTime = styled.li`
+  list-style-type:none;
+  background-color:#4A2787;
+  padding: 16px;
+  border-radius:8px;
+  margin-right:24px;
+  color:#fff;
+`
+
+export const EachDayItems = styled.div`
+
+`

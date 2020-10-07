@@ -43,11 +43,11 @@ const AvailableSchedule: React.FC = () => {
     const updatedScheduleItems = scheduleItems.map((scheduleItem, index) => {
       if (index === position) {
         if (field === 'time') {
-          return { ...scheduleItem, ['time']: new Date(value) };
+          return { ...scheduleItem, time: new Date(value) };
         }
         else if (field === 'day') {
 
-          return { ['time']: new Date(value), [field]: new Date(value) };
+          return { time: new Date(value), [field]: new Date(value) };
         }
       }
       return scheduleItem;

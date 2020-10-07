@@ -105,6 +105,7 @@ export const Dropdown = styled.section`
       font-size: 18px;
       cursor: pointer;
       color: #4a2787;
+      text-decoration:none;
     }
 
     a:last-of-type {

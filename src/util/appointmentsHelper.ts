@@ -1,4 +1,4 @@
-import { format, getDay, getDate, isEqual } from "date-fns";
+import { getDay, getDate } from "date-fns";
 
 interface ISortedAppointments {
     day: Date;
