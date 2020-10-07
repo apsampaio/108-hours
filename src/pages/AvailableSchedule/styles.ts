@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import Select from '../../components/Select';
+import CustomButton from '../../components/Button'
 
 export const Container = styled.div`
   display: flex;
@@ -28,12 +30,6 @@ export const Container = styled.div`
         align-items:center;
         justify-content:space-between;
       }     
-
-      div + div{
-        margin-top:16px;
-        margin-bottom: 24px;
-        border: 1px solid rgba(202, 83, 215, 0.5);
-      }
 
       span {
         font-weight:bold;
@@ -65,6 +61,16 @@ export const SelectDate = styled(Select)`
 
 export const SelectTime = styled(Select)`
   width: 30%;
+`
+
+export const Spacer = styled.div`
+  margin-top:16px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(202, 83, 215, 0.5);
+`
+
+export const Button = styled(CustomButton)`
+  margin: 40px auto ;
 `
 
 

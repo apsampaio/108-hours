@@ -7,32 +7,76 @@ interface ISignInCredentials {
 }
 
 interface IAuthContextData {
-    user: object;
-    signIn(data: ISignInCredentials): Promise<void>
+    user: IUserProps;
+    signIn(data: ISignInCredentials): Promise<void>;
+    signOut(): Promise<void>;
+}
+
+interface IUserProps {
+    id: string,
+    name: string,
+    email: string,
+    phone: string,
+    country: string,
+    state: string,
+    city: string,
+    isAdmin: boolean,
+    avatar: string,
+    created_at: Date,
+    updated_at: Date,
 }
 
 interface IAuthState {
     token: string;
-    user: object;
+    user: IUserProps;
 }
 
 const AuthContext = createContext({} as IAuthContextData)
 
 
 const AuthProvider: React.FC = ({ children }) => {
-    const [data, setData] = useState<IAuthState>({} as IAuthState)
+    const [data, setData] = useState<IAuthState>(() => {
+        const token = localStorage.getItem('@108hours:token')
+        const user = localStorage.getItem('@108hours:user')
+
+        if (token && user) {
+            api.defaults.headers.authorization = `Bearer ${token}`;
+
+            const parsedUser = JSON.parse(user)
+            return { token, user: parsedUser }
+        }
+
+        return {} as IAuthState
+
+    })
 
     const signIn = useCallback(async ({ email, password }) => {
-        api.post('sessions', { email, password }).then(({ data }) => {
-            setData(data)
-        }).catch(() => {
+        api.post('sessions', { email, password }).then((response) => {
+            const { user, token } = response.data
+
+            localStorage.setItem('@108hours:token', token)
+            localStorage.setItem('@108hours:user', JSON.stringify(user))
+
+            api.defaults.headers.authorization = `Bearer ${token}`;
+
+            setData({ user, token })
+        }).catch((response) => {
+
             console.log("Error when authenticating")
+            console.log(response)
         })
+    }, [])
+
+    const signOut = useCallback(async () => {
+        localStorage.removeItem('@108hours:token')
+        localStorage.removeItem('@108hours:user')
+
+        setData({} as IAuthState)
     }, [])
 
 
     return (
-        <AuthContext.Provider value={{ user: data.user, signIn }}>
+        <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
             {children}
         </AuthContext.Provider>)
 }

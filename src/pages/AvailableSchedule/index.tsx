@@ -1,32 +1,73 @@
-import React, { useCallback, useState } from 'react';
-import { format } from 'date-fns'
+import React, { useCallback, useEffect, useState } from 'react';
+import { format, isEqual } from 'date-fns'
 
 import Header from '../../components/Header';
 
-import { Container, SelectDate, SelectTime } from './styles';
+import { groupByDay } from '../../util/appointmentsHelper';
+
+import api from '../../services/api';
+
+import { Container, SelectDate, SelectTime, Spacer, Button } from './styles';
+
+interface IAvailableTimes {
+  day: Date;
+  formatedDay: string;
+  times: Date[];
+}
+
+interface ISelectedSchedule {
+  day: Date;
+  time: Date;
+}
 
 const AvailableSchedule: React.FC = () => {
-  const [day, setDay] = useState('')
-  const [time, setTime] = useState('')
-  const [scheduleItems, setScheduleItems] = useState([
-    new Date()
-  ]);
+  const [availableTimes, setAvailableTimes] = useState<IAvailableTimes[]>([])
+  const [scheduleItems, setScheduleItems] = useState<ISelectedSchedule[]>([]);
 
-  const days = [
-    { label: 'Terça-feira,13', value: '1' },
-    { label: 'dia 2', value: '2' },
-    { label: 'dia 3', value: '3' },
-  ]
+  const addNewScheduleItem = useCallback(() => {
+    setScheduleItems([...scheduleItems, { day: availableTimes[0].day, time: availableTimes[0].times[0] }])
+  }, [scheduleItems, availableTimes])
 
-  const times = [
-    { label: '12:00', value: '1' },
-    { label: '13:00', value: '2' },
-    { label: '15:00', value: '3' },
-  ]
+  useEffect(() => {
+    api.get('/appointments/available').then((response) => {
+      setAvailableTimes(groupByDay(response.data.availableAppointments))
 
-  const addNewScheduleItem = useCallback(() => { 
-    setScheduleItems([...scheduleItems, new Date])
+    })
+  }, [])
+
+
+  const setScheduleItemValue = useCallback((
+    position: number,
+    field: string,
+    value: string) => {
+    const updatedScheduleItems = scheduleItems.map((scheduleItem, index) => {
+      if (index === position) {
+        if (field === 'time') {
+          return { ...scheduleItem, ['time']: new Date(value) };
+        }
+        else if (field === 'day') {
+
+          return { ['time']: new Date(value), [field]: new Date(value) };
+        }
+      }
+      return scheduleItem;
+    });
+
+    setScheduleItems(updatedScheduleItems);
   }, [scheduleItems])
+
+  const handleSubmitButton = useCallback(() => {
+    const promises = scheduleItems.map(scheduleItem => (api.post('/appointments', {
+      date: scheduleItem.time
+    })))
+
+    Promise.all(promises).then((data) => {
+      console.log(data)
+    })
+    console.log(scheduleItems)
+
+  }, [scheduleItems])
+
   return (
     <Container>
       <Header />
@@ -38,21 +79,53 @@ const AvailableSchedule: React.FC = () => {
             <span>Horários disponíveis</span>
             <span onClick={addNewScheduleItem}>+ Novo horário</span>
           </div>
-          <div />
+
+          <Spacer />
+
         </header>
 
         <ul>
-          {scheduleItems.map((scheduleItem, index) => (
+          {scheduleItems.map((scheduleItem, index) => {
+            const element = availableTimes.find(searchDay =>
+              isEqual(searchDay.day, scheduleItem.day))
 
-            <li key={index}>
+            const options = element ? element.times.map(e => ({ label: `${format(e, 'HH')}:00`, value: e.toString() })) : [{ label: '00:00', value: '' }]
 
-              <SelectDate label="Dia da semana" value={day} onChange={e => { setDay(e.target.value) }} name="day" options={days} />
+            return (
 
-              <SelectTime label="Hora" value={format(scheduleItem, 'MM:00')} onChange={e => { setTime(e.target.value) }} name="time" options={times} />
+              <li key={index}>
 
-            </li>
-          ))}
+                <SelectDate
+                  label="Dia da semana"
+                  value={scheduleItems[index].day.toString()}
+                  onChange={e => { setScheduleItemValue(index, 'day', e.target.value) }}
+                  name="day"
+                  options={availableTimes.map(day => (
+                    { label: day.formatedDay, value: day.day.toString() }
+                  ))} />
+
+                <SelectTime
+                  label="Hora"
+                  value={scheduleItem.time.toString()}
+                  onChange={e => {
+                    setScheduleItemValue(index, 'time', e.target.value)
+                  }}
+                  name="time"
+                  options={
+                    options
+                  }
+                //TODO estilizar o dropdown
+                />
+
+              </li>
+            )
+          })}
         </ul>
+
+        <Spacer />
+
+        <Button name="Marcar meus horários" onClick={handleSubmitButton} />
+
 
       </main>
 

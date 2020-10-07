@@ -7,7 +7,8 @@ export const Container = styled.div`
     font-size: 14px;
   }
 
-  select {
+ 
+   select {
     width: 100%;
     background: #FAFAFC;
     height: 56px;
@@ -17,6 +18,14 @@ export const Container = styled.div`
     outline: 0;
     padding: 0 16px;
     font-size:16px;
-    margin: 8px auto 24px;
+    margin: 8px auto 24px; 
+
+  
+  }  
+
+  option {
+    background-color: #FAFAFC;
+    border:1px solid rgba(202, 83, 215, 0.5);
+    border-radius: 8px;
   }
 `;

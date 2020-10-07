@@ -103,7 +103,7 @@ export const Dropdown = styled.section`
       display: block;
       padding: 15px;
       font-size: 18px;
-
+      cursor: pointer;
       color: #4a2787;
     }
 
