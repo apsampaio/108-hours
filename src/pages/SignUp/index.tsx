@@ -1,3 +1,4 @@
+import { Form } from "@unform/web";
 import React, { useState } from "react";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -18,11 +19,12 @@ const SignUp: React.FC = () => {
         <div>
           <FiArrowLeft onClick={() => { history.goBack() }} size={28} color="#CA53D7" />
 
-          <form>
+          <Form onSubmit={() => {}}>
             <h1>Cadastro</h1>
             <p>Preencha os dados abaixo para começar.</p>
             <Input name='name' placeholder="Nome" />
             <Input name='email'placeholder="E-mail" />
+            <Input name='phone'placeholder="Telefone: (00) 98765 4321" />
             <PasswordInputContainer>
               <input
                 type={passwordVisible ? "text" : "password"}
@@ -43,7 +45,7 @@ const SignUp: React.FC = () => {
                 )}
             </PasswordInputContainer>
             <button>Concluir cadastro</button>
-          </form>
+          </Form>
         </div>
       </Content>
       <Banner>

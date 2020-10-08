@@ -45,13 +45,19 @@ export const Dropdown = styled.section`
   min-height: 100px;
   flex: 0;
 
+  a{
+    text-decoration:none;
+    color: #4A2787;
+    font-size: 20px;
+    margin:0 8px 0 8px;
+  }
+
   div {
     display: flex;
 
     align-items: center;
     justify-content: center;
-
-    padding-top: 20px;
+    height:100%;
 
     span {
       padding: 15px 20px 15px 20px;
@@ -87,13 +93,13 @@ export const Dropdown = styled.section`
 
   div + div {
     display: none;
-    position: absolute;
-    min-width: 300px;
+    position: fixed;
+    min-width:300px;
     z-index: 1;
+    height:fit-content;
 
-    margin-top: 19px;
-
-    background: #f0f0f7;
+    /* background-color: red; */
+    background-color: #f0f0f7;
     border: 0.5px solid rgba(0, 0, 0, 0.2);
     border-top: none;
     box-sizing: border-box;

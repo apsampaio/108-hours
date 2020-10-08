@@ -10,6 +10,24 @@ import { Container, Menu, Dropdown } from "./styles";
 const Header: React.FC = () => {
   const { signOut, user } = useAuth()
 
+  if (!user) {
+    return (
+
+      <Container>
+        <Menu>
+          <Link to='/aboutus'>Quem somos</Link>
+        </Menu>
+        <Dropdown>
+          <div>
+           <Link to="/signin">Entrar</Link>
+           |
+           <Link to="/signup"> Cadastre-se</Link>
+          </div>
+        </Dropdown>
+      </Container>
+    )
+  }
+
 
   return (
     <Container>

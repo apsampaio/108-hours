@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch } from "react-router-dom";
+import { Switch, Route as ReactDomRoute } from "react-router-dom";
 
 import Route from './Route'
 import Landing from '../pages/Landing';
@@ -18,7 +18,7 @@ const Routes: React.FC = () => {
             <Route path="/signin" component={Login} />
             <Route path="/signup" component={SignUp} />
             <Route path="/admin/event-date" isPrivate component={EventDate} />
-            <Route path="/aboutus" component={Home} />
+            <ReactDomRoute path="/aboutus" component={Home} />
             <Route path="/profile" isPrivate component={MySchedules} />
             <Route path="/schedule" isPrivate component={AvailableSchedule} />
         </Switch>
