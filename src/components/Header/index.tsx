@@ -19,7 +19,7 @@ const Header: React.FC = () => {
         </Menu>
         <Dropdown>
           <div>
-           <Link to="/signin">Entrar</Link>
+            <Link to="/signin">Entrar</Link>
            |
            <Link to="/signup"> Cadastre-se</Link>
           </div>
@@ -48,7 +48,10 @@ const Header: React.FC = () => {
           <Link to='/profile'>Meus horários</Link>
 
           {user.isAdmin && (
-            <Link to='/admin/event-date'>Configuração de adm.</Link>
+            <>
+              <Link to='/event-date'>Configurar horários</Link>
+              <Link  to='/all-schedule'>Tabela de horários preenchidos</Link>
+            </>
           )}
           <a onClick={signOut}>Sair</a>
         </div>
