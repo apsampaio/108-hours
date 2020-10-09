@@ -72,6 +72,7 @@ const AuthProvider: React.FC = ({ children }) => {
             console.log("Error when authenticating")
             console.log(response)
         })
+        //TODO error handling
     }, [])
 
     const signOut = useCallback(async () => {

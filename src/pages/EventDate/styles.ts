@@ -13,10 +13,9 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  flex-grow: 1;
+  /* flex-grow: 1; */
 
-  margin-top: 64px;
-  margin-bottom: 64px;
+  margin: 64px auto;
 
   border-radius: 8px;
   border: 1px solid rgba(202, 83, 215, 0.5);
@@ -24,8 +23,8 @@ export const Content = styled.div`
   min-width: 736px;
   min-height: 550px;
 
-  background: #fff;
-  align-self: center;
+  background-color: #fff;
+  /* background-color: green; */
 
   display: flex;
   flex-direction: column;
@@ -61,10 +60,35 @@ export const Content = styled.div`
   }
 
   section {
-    display: flex;
-    align-items: left;
-    margin-left: 64px;
+    flex:1;
+    /* background-color:red; */
+    padding:0 64px;
 
     filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15));
+
+    form {
+      /* background-color:blue; */
+      
+      display:flex;
+      justify-content:space-evenly;
+      align-items:center;
+    }
+
+    form + button {      
+      position:absolute;
+      right: 64px;
+      bottom:32px;
+
+      background-color: #CA53D7;
+
+      border: 1px solid #CA53D7;
+      box-sizing: border-box;
+      border-radius: 2px;
+      padding:8px 16px;
+
+      font-size:14px;
+      color:#fff;
+    }
   }
+  
 `;

@@ -28,7 +28,7 @@ interface IStatesInterface {
 interface StatesRequestInterface {
   nome: string;
   id: string;
-}
+} 
 
 const SignUp: React.FC = () => {
   const { signIn } = useAuth()
