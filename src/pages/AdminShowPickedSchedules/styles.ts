@@ -21,7 +21,7 @@ export const Content = styled.div`
   border-radius: 8px;
   border: 1px solid rgba(202, 83, 215, 0.5);
 
-  min-width: 736px;
+  min-width: 800px;
   min-height: 550px;
 
   background: #fff;

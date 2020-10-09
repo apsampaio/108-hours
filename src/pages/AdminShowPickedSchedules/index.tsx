@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect,  useState } from 'react';
 import { format } from "date-fns";
 
 import Footer from '../../components/Footer';
@@ -23,14 +23,16 @@ interface ITableData {
     schedule_time: string
 }
 
+//TODO Download data button to be added
+
 const AdminShowPickedSchedules: React.FC = () => {
     const [appointments, setAppointments] = useState<ITableData[]>([])
     useEffect(() => {
         api.get<IResponse[]>('/appointments').then(({ data }) => {
             console.log(data)
             const parsedAppointments = data.map(appointment => ({
-                user_name: appointment.user.name,
-                email: appointment.user.email,
+                user_name: appointment.user?.name,
+                email: appointment.user?.email,
                 schedule_time: format(new Date(appointment.date), 'dd/LL - HH:00'),
             }))
 

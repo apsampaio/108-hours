@@ -53,7 +53,7 @@ const Header: React.FC = () => {
               <Link  to='/all-schedule'>Tabela de horários preenchidos</Link>
             </>
           )}
-          <a onClick={signOut}>Sair</a>
+          <a  onClick={signOut}>Sair</a>
         </div>
       </Dropdown>
     </Container>
