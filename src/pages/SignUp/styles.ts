@@ -2,10 +2,11 @@ import styled from "styled-components";
 //TODO fix layout size
 
 export const Container = styled.div`
+  display: flex;
+
   width: 100vw;
   height: 100vh;
 
-  display: flex;
 `;
 
 export const Banner = styled.div`
@@ -42,20 +43,21 @@ export const Banner = styled.div`
 `;
 
 export const Content = styled.div`
-  flex: 1;
   display: flex;
-
-  justify-content: center;
-  align-items: center;
-
+  flex: 1;
   flex-direction: column;
 
-  form {
-    margin-top: 114px;
 
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  form {
+
+    min-width: 352px;
     display: flex;
     flex-direction: column;
-    min-width: 352px;
 
     h1 {
       color: #32264d;
@@ -88,6 +90,7 @@ export const Content = styled.div`
       margin-bottom: 128px;
     }
   }
+}
 `;
 
 export const PasswordInputContainer = styled.div`
