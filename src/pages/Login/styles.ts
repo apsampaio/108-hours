@@ -39,6 +39,11 @@ export const Banner = styled.div`
       font-size: 24px;
     }
   }
+
+  @media(max-width: 800px) {
+    display: none;
+  }
+
 `;
 
 export const Content = styled.div`
@@ -107,6 +112,16 @@ export const Content = styled.div`
       color: #ca53d7;
     }
   }
+
+  @media(max-width: 800px) {
+    width: 100vw;
+   
+   form {
+    min-width: 90vw;
+   }
+
+  }
+
 `;
 
 // export const PasswordInputContainer = styled.div`
