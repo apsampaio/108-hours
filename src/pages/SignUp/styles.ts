@@ -40,6 +40,8 @@ export const Banner = styled.div`
       font-size: 24px;
     }
   }
+
+
 `;
 
 export const Content = styled.div`
