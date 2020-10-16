@@ -50,18 +50,18 @@ const MySchedules: React.FC = () => {
             <label>
               Segunda-feira, 12
             </label>
-            
+
             <EachDayItems>
               <EachTime>
-                  09:00
+                09:00
               </EachTime>
 
               <EachTime>
-                  10:00
+                10:00
               </EachTime>
 
               <EachTime>
-                  11:00
+                11:00
               </EachTime>
 
             </EachDayItems>

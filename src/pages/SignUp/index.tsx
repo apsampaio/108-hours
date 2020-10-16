@@ -169,12 +169,12 @@ const SignUp: React.FC = () => {
                     size={24}
                   />
                 ) : (
-                  <FiEye
-                    onClick={() => setPasswordVisible(!passwordVisible)}
-                    color="#9C98A6"
-                    size={24}
-                  />
-                )
+                    <FiEye
+                      onClick={() => setPasswordVisible(!passwordVisible)}
+                      color="#9C98A6"
+                      size={24}
+                    />
+                  )
               }
             ></Input>
 

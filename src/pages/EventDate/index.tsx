@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { format, isBefore, isEqual, startOfDay } from "date-fns";
+import { isBefore, isEqual, startOfDay } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 import Header from "../../components/Header";
@@ -33,7 +33,7 @@ const EventDate: React.FC = () => {
       setEndDate(startOfDay(date))
     }
 
-  }, [startDate, endDate])
+  }, [endDate])
 
 
   return (
