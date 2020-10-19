@@ -18,13 +18,8 @@ const Login: React.FC = () => {
   const [remindme, setRemindme] = useState(false);
 
   const handleSubmit = useCallback(async ({ email, password }) => {
-    console.log('Authenticate!')
     await signIn({ email, password })
   }, [signIn])
-
-
-
-
   return (
     <Container>
       <Banner>

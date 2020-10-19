@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { format, isEqual } from 'date-fns'
+import { isEqual } from 'date-fns'
 
 import Header from '../../components/Header';
 
@@ -8,11 +8,12 @@ import { groupByDay } from '../../util/appointmentsHelper';
 import api from '../../services/api';
 
 import { Container, SelectDate, SelectTime, Spacer, Button } from './styles';
+import { useAuth } from '../../hooks/Auth';
 
 interface IAvailableTimes {
   day: Date;
   formatedDay: string;
-  times: Date[];
+  times: { time: Date, formattedTime: string }[];
 }
 
 interface ISelectedSchedule {
@@ -21,17 +22,17 @@ interface ISelectedSchedule {
 }
 
 const AvailableSchedule: React.FC = () => {
+  const { updateUserInfo } = useAuth()
   const [availableTimes, setAvailableTimes] = useState<IAvailableTimes[]>([])
   const [scheduleItems, setScheduleItems] = useState<ISelectedSchedule[]>([]);
 
   const addNewScheduleItem = useCallback(() => {
-    setScheduleItems([...scheduleItems, { day: availableTimes[0].day, time: availableTimes[0].times[0] }])
+    setScheduleItems([...scheduleItems, { day: availableTimes[0].day, time: availableTimes[0].times[0].time }])
   }, [scheduleItems, availableTimes])
 
   useEffect(() => {
     api.get('/appointments/available').then((response) => {
       setAvailableTimes(groupByDay(response.data.availableAppointments))
-
     })
   }, [])
 
@@ -62,11 +63,9 @@ const AvailableSchedule: React.FC = () => {
     })))
 
     Promise.all(promises).then((data) => {
-      console.log(data)
+      updateUserInfo()
     })
-    console.log(scheduleItems)
-
-  }, [scheduleItems])
+  }, [scheduleItems, updateUserInfo])
 
   return (
     <Container>
@@ -89,7 +88,7 @@ const AvailableSchedule: React.FC = () => {
             const element = availableTimes.find(searchDay =>
               isEqual(searchDay.day, scheduleItem.day))
 
-            const options = element ? element.times.map(e => ({ label: `${format(e, 'HH')}:00`, value: e.toString() })) : [{ label: '00:00', value: '' }]
+            const options = element ? element.times.map(e => ({ label: e.formattedTime, value: e.time.toString() })) : [{ label: '00:00', value: '' }]
 
             return (
 

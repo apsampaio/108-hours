@@ -1,38 +1,41 @@
-import { getDay, getDate } from "date-fns";
+import { getDay, getDate, isAfter, format } from "date-fns";
 
 interface ISortedAppointments {
-    day: Date;
-    formatedDay: string;
-    times: Date[];
+  day: Date;
+  formatedDay: string;
+  times: { time: Date, formattedTime: string }[];
 }
 
 const week_days = [
-    'Domingo',
-    'Segunda-feira',
-    'Terça-feira',
-    'Quarta-feira',
-    'Quinta-feira',
-    'Sexta-feira',
-    'Sábado'
+  'Domingo',
+  'Segunda-feira',
+  'Terça-feira',
+  'Quarta-feira',
+  'Quinta-feira',
+  'Sexta-feira',
+  'Sábado'
 ]
 
 export function groupByDay(unsortedAppointments: string[]) {
-    const appointments: ISortedAppointments[] = []
-    unsortedAppointments.forEach((appointment) => {
-        const formatedDay = `${week_days[getDay(new Date(appointment))]}, ${getDate(new Date(appointment))}`
+  const appointments: ISortedAppointments[] = []
+  unsortedAppointments.forEach((appointment) => {
+    const formatedDay = `${week_days[getDay(new Date(appointment))]}, ${getDate(new Date(appointment))}`
 
-        const dayFound = appointments.findIndex(appointmentToSearch => (
-            appointmentToSearch.formatedDay === formatedDay
-        ))
+    const dayFound = appointments.findIndex(appointmentToSearch => (
+      appointmentToSearch.formatedDay === formatedDay
+    ))
 
-        if (dayFound < 0) {
-            appointments.push({ day: new Date(appointment), formatedDay, times: [new Date(appointment)] })
-        } else {
-            appointments[dayFound].times.push(new Date(appointment))
+    const formattedTime = format(new Date(appointment), 'HH:00')
+    if (dayFound < 0) {
+      appointments.push({ day: new Date(appointment), formatedDay, times: [{ time: new Date(appointment), formattedTime }] })
+    } else {
+      appointments[dayFound].times.push({ time: new Date(appointment), formattedTime })
 
-        }
-    })
+    }
+  })
+
+  const sortedAppointments = appointments.sort((a, b) => isAfter(a.day, b.day) ? 1 : -1)
 
 
-    return appointments
+  return sortedAppointments
 }

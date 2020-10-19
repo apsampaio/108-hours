@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -9,16 +9,21 @@ import noScheduleImg from '../../assets/noSchedule.svg';
 import { useAuth, IAppointment } from '../../hooks/Auth';
 
 import { Container, Content, DayList, DayItem } from './styles';
+import { groupByDay } from '../../util/appointmentsHelper';
 
 const MySchedules: React.FC = () => {
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
   const { user } = useAuth();
 
+  const appointmentsByDay = useMemo(() => {
+    return groupByDay(appointments.map(appointments => appointments.date))
+  }, [appointments])
+
   useEffect(() => {
     setAppointments(user.appointments);
   }, [user]);
 
-  if (!appointments) {
+  if (!appointments.length) {
     return (
       <Container>
         <Header />
@@ -46,39 +51,17 @@ const MySchedules: React.FC = () => {
         </div>
 
         <DayList>
-          <DayItem>
-            <label>Segunda-feira, 12</label>
-            <span>
-              <span>09:00</span>
-              <span>10:00</span>
-              <span>11:00</span>
-            </span>
-          </DayItem>
-          <DayItem>
-            <label>Terça-feira, 13</label>
-            <span>
-              <span>09:00</span>
-              <span>10:00</span>
-              <span>11:00</span>
-              <span>12:00</span>
-              <span>13:00</span>
-              <span>14:00</span>
-            </span>
-          </DayItem>
-          <DayItem>
-            <label>Quarta-feira, 14</label>
-            <span>
-              <span>09:00</span>
-              <span>10:00</span>
-              <span>11:00</span>
-              <span>12:00</span>
-              <span>13:00</span>
-              <span>14:00</span>
-              <span>15:00</span>
-              <span>16:00</span>
-              <span>17:00</span>
-            </span>
-          </DayItem>
+
+          {appointmentsByDay.map(({ formatedDay, times }) => (
+            <DayItem key={formatedDay} >
+              <label >{formatedDay}</label>
+              <span>
+                {times.map(({ formattedTime, time }) => (
+                  <span key={time.toString()} >{formattedTime}</span>
+                ))}
+              </span>
+            </DayItem>
+          ))}
         </DayList>
       </Content>
       <Footer />
