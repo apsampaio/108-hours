@@ -136,6 +136,7 @@ export const DayItem = styled.main`
 
       margin-right: 24px;
       margin-top: 12px;
+      cursor: pointer;
     }
 
   }

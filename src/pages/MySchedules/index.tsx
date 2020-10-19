@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -9,19 +9,26 @@ import noScheduleImg from '../../assets/noSchedule.svg';
 import { useAuth, IAppointment } from '../../hooks/Auth';
 
 import { Container, Content, DayList, DayItem } from './styles';
-import { groupByDay } from '../../util/appointmentsHelper';
+import { groupByDayWithId } from '../../util/appointmentsHelper';
+import api from '../../services/api';
 
 const MySchedules: React.FC = () => {
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
-  const { user } = useAuth();
+  const { user, updateUserInfo } = useAuth();
 
   const appointmentsByDay = useMemo(() => {
-    return groupByDay(appointments.map(appointments => appointments.date))
+    return groupByDayWithId(appointments)
   }, [appointments])
 
   useEffect(() => {
     setAppointments(user.appointments);
   }, [user]);
+
+  const handleDeleteAppointment = useCallback((id: string) => {
+    // api.delete(`/appointments/${id}`).then(() => {
+    //   updateUserInfo()
+    // })
+  }, [updateUserInfo])
 
   if (!appointments.length) {
     return (
@@ -56,8 +63,8 @@ const MySchedules: React.FC = () => {
             <DayItem key={formatedDay} >
               <label >{formatedDay}</label>
               <span>
-                {times.map(({ formattedTime, time }) => (
-                  <span key={time.toString()} >{formattedTime}</span>
+                {times.map(({ formattedTime, time, id }) => (
+                  <span onClick={() => { handleDeleteAppointment(id) }} key={time.toString()} >{formattedTime}</span>
                 ))}
               </span>
             </DayItem>
