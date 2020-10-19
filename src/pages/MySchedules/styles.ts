@@ -94,6 +94,8 @@ export const DayItem = styled.main`
   width: 100%;
   max-width: 736px;
 
+  position: relative;
+
   flex-direction: column;
 
   align-items: flex-start;
@@ -139,9 +141,30 @@ export const DayItem = styled.main`
       cursor: pointer;
     }
 
+
   }
 
 
 
+  button {
+    position: absolute;
+    padding: 0px 35px;
+
+    height: 30px;
+
+    bottom: -15px;
+    left: calc(50% - 70px);
+
+
+    border: 0;
+    background: #FFF;
+    color: #CA53D7;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
 
 `;

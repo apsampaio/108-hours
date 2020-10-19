@@ -17,18 +17,21 @@ const MySchedules: React.FC = () => {
   const { user, updateUserInfo } = useAuth();
 
   const appointmentsByDay = useMemo(() => {
-    return groupByDayWithId(appointments)
-  }, [appointments])
+    return groupByDayWithId(appointments);
+  }, [appointments]);
 
   useEffect(() => {
     setAppointments(user.appointments);
   }, [user]);
 
-  const handleDeleteAppointment = useCallback((id: string) => {
-    // api.delete(`/appointments/${id}`).then(() => {
-    //   updateUserInfo()
-    // })
-  }, [updateUserInfo])
+  const handleDeleteAppointment = useCallback(
+    (id: string) => {
+      // api.delete(`/appointments/${id}`).then(() => {
+      //   updateUserInfo()
+      // })
+    },
+    [updateUserInfo],
+  );
 
   if (!appointments.length) {
     return (
@@ -58,15 +61,22 @@ const MySchedules: React.FC = () => {
         </div>
 
         <DayList>
-
           {appointmentsByDay.map(({ formatedDay, times }) => (
-            <DayItem key={formatedDay} >
-              <label >{formatedDay}</label>
+            <DayItem key={formatedDay}>
+              <label>{formatedDay}</label>
               <span>
                 {times.map(({ formattedTime, time, id }) => (
-                  <span onClick={() => { handleDeleteAppointment(id) }} key={time.toString()} >{formattedTime}</span>
+                  <span
+                    onClick={() => {
+                      handleDeleteAppointment(id);
+                    }}
+                    key={time.toString()}
+                  >
+                    {formattedTime}
+                  </span>
                 ))}
               </span>
+              <button>Excluir horário</button>
             </DayItem>
           ))}
         </DayList>
