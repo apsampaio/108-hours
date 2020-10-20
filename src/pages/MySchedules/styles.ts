@@ -168,3 +168,56 @@ export const DayItem = styled.main`
   }
 
 `;
+
+export const Modal = styled.div`
+  position: absolute;
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+
+  left: 0;
+  top: 0;
+
+  background-color: rgba(0,0,0,.4);
+
+  align-items: center;
+  justify-content: center !important;
+
+
+  span {
+
+    background-color: #FFF;
+    padding: 24px;
+    border-radius: 8px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+    p {
+      color: #333333;
+      font-weight: 500;
+    }
+
+    div {
+
+      justify-content: center;
+      margin-top: 17px;
+
+      button {
+        color: #CA53D7;
+        background-color: transparent;
+        border:0;
+        font-weight: 500;
+
+        font-size: 16px;
+      }
+
+      button + button {
+        margin-left: 20px;
+      }
+
+    }
+
+
+  }
+
+`

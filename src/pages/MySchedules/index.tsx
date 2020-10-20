@@ -8,12 +8,13 @@ import noScheduleImg from '../../assets/noSchedule.svg';
 
 import { useAuth, IAppointment } from '../../hooks/Auth';
 
-import { Container, Content, DayList, DayItem } from './styles';
+import { Container, Content, DayList, DayItem, Modal } from './styles';
 import { groupByDayWithId } from '../../util/appointmentsHelper';
 import api from '../../services/api';
 
 const MySchedules: React.FC = () => {
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
+  const [modalVisibility, setModalVisibility] = useState(false);
   const { user, updateUserInfo } = useAuth();
 
   const appointmentsByDay = useMemo(() => {
@@ -32,6 +33,10 @@ const MySchedules: React.FC = () => {
     },
     [updateUserInfo],
   );
+
+  const handleClickDelete = useCallback(() => {
+    setModalVisibility(true);
+  }, []);
 
   if (!appointments.length) {
     return (
@@ -76,10 +81,26 @@ const MySchedules: React.FC = () => {
                   </span>
                 ))}
               </span>
-              <button>Excluir horário</button>
+              <button onClick={handleClickDelete}>Excluir horário</button>
             </DayItem>
           ))}
         </DayList>
+        {modalVisibility && (
+          <Modal>
+            <span>
+              <p>Tem certeza que deseja excluir este horário?</p>
+              <p>Segunda-feira, 13/10, 09:00</p>
+              <div>
+                <button onClick={() => setModalVisibility(false)}>
+                  Excluir
+                </button>
+                <button onClick={() => setModalVisibility(false)}>
+                  Cancelar
+                </button>
+              </div>
+            </span>
+          </Modal>
+        )}
       </Content>
       <Footer />
     </Container>
