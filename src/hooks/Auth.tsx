@@ -100,7 +100,7 @@ const AuthProvider: React.FC = ({ children }) => {
   );
 };
 
-function useAuth() {
+function useAuth(): IAuthContextData {
   const context = useContext(AuthContext);
 
   if (!context) {

@@ -1,20 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { isEqual } from 'date-fns';
 
 import Header from '../../components/Header';
-
-import { groupByDay } from '../../util/appointmentsHelper';
 
 import api from '../../services/api';
 
 import { Container, SelectDate, SelectTime, Spacer, Button } from './styles';
 import { useAuth } from '../../hooks/Auth';
-
-interface IAvailableTimes {
-  day: Date;
-  formatedDay: string;
-  times: { time: Date; formattedTime: string }[];
-}
+import { useSchedule } from '../../hooks/Schedule';
 
 interface ISelectedSchedule {
   day: Date;
@@ -23,8 +16,11 @@ interface ISelectedSchedule {
 
 const AvailableSchedule: React.FC = () => {
   const { updateUserInfo } = useAuth();
-  const [availableTimes, setAvailableTimes] = useState<IAvailableTimes[]>([]);
-  const [scheduleItems, setScheduleItems] = useState<ISelectedSchedule[]>([]);
+
+  const { availableSchedule: availableTimes } = useSchedule();
+  const [scheduleItems, setScheduleItems] = useState<ISelectedSchedule[]>([
+    { day: availableTimes[0].day, time: availableTimes[0].times[0].time },
+  ]);
 
   const addNewScheduleItem = useCallback(() => {
     setScheduleItems([
@@ -32,12 +28,6 @@ const AvailableSchedule: React.FC = () => {
       { day: availableTimes[0].day, time: availableTimes[0].times[0].time },
     ]);
   }, [scheduleItems, availableTimes]);
-
-  useEffect(() => {
-    api.get('/appointments/available').then(response => {
-      setAvailableTimes(groupByDay(response.data.availableAppointments));
-    });
-  }, []);
 
   const setScheduleItemValue = useCallback(
     (position: number, field: string, value: string) => {
