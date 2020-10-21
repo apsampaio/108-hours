@@ -56,25 +56,23 @@ const AuthProvider: React.FC = ({ children }) => {
     return {} as IAuthState;
   });
 
-  const signIn = useCallback(async ({ email, password }) => {
-    api
-      .post('sessions', { email, password })
-      .then(response => {
-        const { user, token } = response.data;
+  const signIn = useCallback(
+    async ({ email, password }: ISignInCredentials) => {
+      const response = await api.post('sessions', { email, password });
 
-        localStorage.setItem('@108hours:token', token);
-        localStorage.setItem('@108hours:user', JSON.stringify(user));
+      const { user, token } = response.data;
 
-        api.defaults.headers.authorization = `Bearer ${token}`;
+      localStorage.setItem('@108hours:token', token);
+      localStorage.setItem('@108hours:user', JSON.stringify(user));
 
-        setData({ user, token });
-      })
-      .catch(response => {
-        console.log('Error when authenticating');
-        console.log(response);
-      });
-    // TODO error handling
-  }, []);
+      api.defaults.headers.authorization = `Bearer ${token}`;
+
+      setData({ user, token });
+
+      // TODO error handling
+    },
+    [],
+  );
 
   const signOut = useCallback(async () => {
     localStorage.removeItem('@108hours:token');

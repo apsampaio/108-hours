@@ -14,12 +14,21 @@ import { Container, Banner, Content, Button } from './styles';
 const Login: React.FC = () => {
   const { signIn } = useAuth();
   const formRef = useRef<FormHandles>(null);
+
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [remindme, setRemindme] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
     async ({ email, password }) => {
-      await signIn({ email, password });
+      try {
+        setLoading(true);
+        await signIn({ email, password });
+      } catch (error) {
+        // TODO error handling
+      } finally {
+        setLoading(false);
+      }
     },
     [signIn],
   );
@@ -65,7 +74,7 @@ const Login: React.FC = () => {
             />
             Lembrar-me
           </label>
-          <Button type="submit">Entrar</Button>
+          <Button type="submit">{loading ? 'Carregando...' : 'Entrar'}</Button>
           <p>
             Não tem conta? <Link to="/signup">Cadastre-se</Link>
           </p>
