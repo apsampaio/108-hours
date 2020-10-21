@@ -1,5 +1,4 @@
 import styled from "styled-components";
-//TODO fix layout size
 
 export const Container = styled.div`
   display: flex;
@@ -40,6 +39,10 @@ export const Banner = styled.div`
     }
   }
 
+  @media(max-width: 800px) {
+    display: none;
+  }
+
 
 `;
 
@@ -48,50 +51,68 @@ export const Content = styled.div`
   flex: 1;
   flex-direction: column;
 
-
-
   div {
     display: flex;
     justify-content: center;
     align-items: center;
-  form {
+    form {
 
-    min-width: 352px;
-    display: flex;
-    flex-direction: column;
+      min-width: 352px;
+      display: flex;
+      flex-direction: column;
 
-    h1 {
-      color: #32264d;
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
+      h1 {
+        color: #32264d;
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
 
-    p {
-      color: #333333;
-      font-size: 18px;
-      font-family: "Roboto";
-      width: 250px;
-      margin-bottom: 40px;
+      p {
+        color: #333333;
+        font-size: 18px;
+        font-family: "Roboto";
+        width: 250px;
+        margin-bottom: 40px;
 
-      line-height: 26px;
-    }
+        line-height: 26px;
+      }
 
-    button {
-      background: #4a2787;
-      border-radius: 8px;
-      height: 56px;
+      button {
+        background: #4a2787;
+        border-radius: 8px;
+        height: 56px;
 
-      font-weight: 500;
-      font-size: 18px;
-      letter-spacing: 1px;
-      color: #fff;
+        font-weight: 500;
+        font-size: 18px;
+        letter-spacing: 1px;
+        color: #fff;
 
-      border: 0;
-      margin-top: 40px;
-      margin-bottom: 128px;
+        border: 0;
+        margin-top: 40px;
+        margin-bottom: 36px;
+      }
+
+      button + button {
+        margin: 0px;
+        height: fit-content;
+        background: transparent;
+        color: #CA53D7;
+        margin-bottom: 36px;
+      }
     }
   }
-}
+
+  @media(max-width: 800px) {
+    div {
+      form {
+        max-width: 80vw;
+        select {
+          width: 90%;
+        }
+      }
+    }
+  }
+
 `;
 
 export const PasswordInputContainer = styled.div`

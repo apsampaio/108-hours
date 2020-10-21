@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Form } from '@unform/web';
 import { useHistory } from 'react-router-dom';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import { FiArrowLeft } from 'react-icons/fi';
 
 import api, { statesApi } from '../../services/api';
 
@@ -140,13 +139,6 @@ const SignUp: React.FC = () => {
   return (
     <Container>
       <Content>
-        <FiArrowLeft
-          onClick={() => {
-            history.goBack();
-          }}
-          size={28}
-          color="#CA53D7"
-        />
         <div>
           <Form onSubmit={handleSubmitForm}>
             <h1>Cadastro</h1>
@@ -178,12 +170,12 @@ const SignUp: React.FC = () => {
                     size={24}
                   />
                 ) : (
-                    <FiEye
-                      onClick={() => setPasswordVisible(!passwordVisible)}
-                      color="#9C98A6"
-                      size={24}
-                    />
-                  )
+                  <FiEye
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                    color="#9C98A6"
+                    size={24}
+                  />
+                )
               }
             />
 
@@ -216,6 +208,9 @@ const SignUp: React.FC = () => {
 
             <button type="submit">
               {loading ? 'Aguarde...' : 'Concluir cadastro'}
+            </button>
+            <button onClick={() => history.goBack()} type="button">
+              Voltar
             </button>
           </Form>
         </div>
