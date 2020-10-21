@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Table = styled.table`
-    margin:32px auto;
+    margin:32px 64px;
     width:80%;
     background-color: #FFFCFE;
 
