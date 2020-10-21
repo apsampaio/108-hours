@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { isWithinInterval } from 'date-fns';
 
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
@@ -11,15 +12,22 @@ import { useAuth, IAppointment } from '../../hooks/Auth';
 import { Container, Content, DayList, DayItem, Modal } from './styles';
 import { groupByDayWithId } from '../../util/appointmentsHelper';
 import api from '../../services/api';
+import { useSchedule } from '../../hooks/Schedule';
 
 const MySchedules: React.FC = () => {
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
   const [modalVisibility, setModalVisibility] = useState(false);
+
   const { user, updateUserInfo } = useAuth();
+  const { activePeriod } = useSchedule();
 
   const appointmentsByDay = useMemo(() => {
-    return groupByDayWithId(appointments);
-  }, [appointments]);
+    const { start, end } = activePeriod;
+    const filteredAppointments = appointments.filter(appointment =>
+      isWithinInterval(new Date(appointment.date), { start, end }),
+    );
+    return groupByDayWithId(filteredAppointments);
+  }, [activePeriod, appointments]);
 
   useEffect(() => {
     setAppointments(user.appointments);
@@ -81,7 +89,9 @@ const MySchedules: React.FC = () => {
                   </span>
                 ))}
               </span>
-              <button onClick={handleClickDelete}>Excluir horário</button>
+              <button type="button" onClick={handleClickDelete}>
+                Excluir horário
+              </button>
             </DayItem>
           ))}
         </DayList>

@@ -1,9 +1,17 @@
+import { getDate, getMonth, getYear } from 'date-fns';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import api from '../services/api';
 import { groupByDay } from '../util/appointmentsHelper';
 
+interface ActivePeriod {
+  start: Date;
+  end: Date;
+  formatedActivePeriod: string;
+}
+
 interface IScheduleContextData {
   availableSchedule: IAvailableScheduleItem[];
+  activePeriod: ActivePeriod;
 }
 
 export interface IAvailableScheduleItem {
@@ -19,7 +27,27 @@ interface IScheduleState {
 const ScheduleContext = createContext({} as IScheduleContextData);
 
 const ScheduleProvider: React.FC = ({ children }) => {
+  const months = [
+    'Janeiro',
+    'Fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro',
+  ];
+
   const [data, setData] = useState<IScheduleState>({} as IScheduleState);
+  const [activePeriod, setActivePeriod] = useState<ActivePeriod>({
+    start: new Date(),
+    end: new Date(),
+    formatedActivePeriod: '',
+  });
 
   useEffect(() => {
     api.get('/appointments/available').then(response => {
@@ -29,9 +57,26 @@ const ScheduleProvider: React.FC = ({ children }) => {
     });
   }, []);
 
+  useEffect(() => {
+    api.get('setup').then(response => {
+      const start = new Date(response.data.period.start);
+      const end = new Date(response.data.period.end);
+
+      const formatedActivePeriod = `${getDate(
+        new Date(activePeriod.start),
+      )} a ${getDate(end)} de ${months[getMonth(start)]} de ${getYear(start)}`;
+
+      setActivePeriod({
+        start,
+        end,
+        formatedActivePeriod,
+      });
+    });
+  }, []);
+
   return (
     <ScheduleContext.Provider
-      value={{ availableSchedule: data.availableSchedule }}
+      value={{ availableSchedule: data.availableSchedule, activePeriod }}
     >
       {children}
     </ScheduleContext.Provider>

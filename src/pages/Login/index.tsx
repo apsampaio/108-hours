@@ -10,9 +10,12 @@ import { useAuth } from '../../hooks/Auth';
 import Input from '../../components/Input';
 
 import { Container, Banner, Content, Button } from './styles';
+import { useSchedule } from '../../hooks/Schedule';
 
 const Login: React.FC = () => {
   const { signIn } = useAuth();
+  const { activePeriod } = useSchedule();
+
   const formRef = useRef<FormHandles>(null);
 
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -37,7 +40,7 @@ const Login: React.FC = () => {
       <Banner>
         <div>
           <h1>108 horas orando com a Mãe Divina</h1>
-          <p>12 a 16 de Outubro de 2020</p>
+          <p>{activePeriod.formatedActivePeriod}</p>
         </div>
       </Banner>
       <Content>

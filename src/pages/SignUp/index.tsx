@@ -13,6 +13,7 @@ import Select from '../../components/Select';
 import { useAuth } from '../../hooks/Auth';
 
 import { Container, Banner, Content } from './styles';
+import { useSchedule } from '../../hooks/Schedule';
 
 interface ICountriesRequestInterface {
   translations: { br: string };
@@ -31,6 +32,7 @@ interface StatesRequestInterface {
 
 const SignUp: React.FC = () => {
   const { signIn } = useAuth();
+  const { activePeriod } = useSchedule();
   const history = useHistory();
 
   const [loading, setLoading] = useState(false);
@@ -221,7 +223,7 @@ const SignUp: React.FC = () => {
       <Banner>
         <div>
           <h1>108 horas orando com a Mãe Divina</h1>
-          <p>12 a 16 de Outubro de 2020</p>
+          <p>{activePeriod.formatedActivePeriod}</p>
         </div>
       </Banner>
     </Container>
