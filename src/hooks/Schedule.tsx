@@ -1,5 +1,11 @@
 import { getDate, getMonth, getYear } from 'date-fns';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import api from '../services/api';
 import { groupByDay } from '../util/appointmentsHelper';
 
@@ -29,20 +35,22 @@ interface IScheduleState {
 const ScheduleContext = createContext({} as IScheduleContextData);
 
 const ScheduleProvider: React.FC = ({ children }) => {
-  const months = [
-    'Janeiro',
-    'Fevereiro',
-    'Março',
-    'Abril',
-    'Maio',
-    'Junho',
-    'Julho',
-    'Agosto',
-    'Setembro',
-    'Outubro',
-    'Novembro',
-    'Dezembro',
-  ];
+  const months = useMemo(() => {
+    return [
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro',
+    ];
+  }, []);
 
   const [data, setData] = useState<IScheduleState>({} as IScheduleState);
   const [activePeriod, setActivePeriod] = useState<ActivePeriod>({
@@ -53,7 +61,6 @@ const ScheduleProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     api.get('/appointments/available').then(response => {
-      console.log(response.data.availableAppointments);
       setData({
         availableSchedule: groupByDay(response.data.availableAppointments),
       });
@@ -65,9 +72,8 @@ const ScheduleProvider: React.FC = ({ children }) => {
       const start = new Date(response.data.period.start);
       const end = new Date(response.data.period.end);
 
-      const formatedActivePeriod = `${getDate(
-        new Date(activePeriod.start),
-      )} a ${getDate(end)} de ${months[getMonth(start)]} de ${getYear(start)}`;
+      const formatedActivePeriod = `${getDate(start)} a ${getDate(end)} de ${months[getMonth(start)]
+        } de ${getYear(start)}`;
 
       setActivePeriod({
         start,
@@ -75,7 +81,7 @@ const ScheduleProvider: React.FC = ({ children }) => {
         formatedActivePeriod,
       });
     });
-  }, [activePeriod.start, months]);
+  }, [months]);
 
   useEffect(() => {
     socket.on('newAppointments', (appointments: string[]) => {

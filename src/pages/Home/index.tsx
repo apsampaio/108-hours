@@ -1,10 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
-import { Container, Content } from "./styles";
+import { Container, Content } from './styles';
 
+// TODO Make dynamic dates
 const Home: React.FC = () => {
   return (
     <Container>
@@ -22,7 +23,7 @@ const Home: React.FC = () => {
           </p>
           <p>
             Estamos nos preparando para a Quarta Jornada, que acontecerá dos
-            dias <span>12</span> à <span>16</span> de <span>Outubro</span> de{" "}
+            dias <span>12</span> à <span>16</span> de <span>Outubro</span> de{' '}
             <span>2020</span>.
           </p>
           <p>
@@ -40,7 +41,7 @@ const Home: React.FC = () => {
             aconteceu de 8 a 12 de Abril de 2020.
           </p>
           <p>
-            Participe do nosso Canal no Telegram:{" "}
+            Participe do nosso Canal no Telegram:{' '}
             <a href="http://t.me/Orando108Horas">Orando 108 Horas Telegram</a>
           </p>
           <p>Gratidão e seguimos em união à Mãe Divina</p>

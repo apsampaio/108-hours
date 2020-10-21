@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -55,7 +55,7 @@ export const Content = styled.div`
 
       font-weight: bold;
       color: #8257e5;
-      text-decoration:none;
+      text-decoration: none;
     }
   }
 
@@ -86,9 +86,9 @@ export const Content = styled.div`
 `;
 
 export const DayList = styled.ul`
-    display: flex;
-    flex-direction: column;
-`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const DayItem = styled.main`
   width: 100%;
@@ -108,12 +108,12 @@ export const DayItem = styled.main`
   padding-bottom: 28px;
   border-bottom: 1px solid rgba(202, 83, 215, 0.5);
 
-  &:last-of-type{
+  &:last-of-type {
     border-bottom: 0;
   }
 
   label {
-    color: #32264D;
+    color: #32264d;
     font-weight: 500;
   }
 
@@ -129,22 +129,18 @@ export const DayItem = styled.main`
 
     span {
       font-size: 16px;
-      color: #FFFCFE;
-      background: #4A2787;
+      color: #fffcfe;
+      background: #4a2787;
 
       padding: 15px 20px;
-      border: 1px solid #4A2787;
+      border: 1px solid #4a2787;
       border-radius: 8px;
 
       margin-right: 24px;
       margin-top: 12px;
       cursor: pointer;
     }
-
-
   }
-
-
 
   button {
     position: absolute;
@@ -155,10 +151,9 @@ export const DayItem = styled.main`
     bottom: -15px;
     left: calc(50% - 70px);
 
-
     border: 0;
-    background: #FFF;
-    color: #CA53D7;
+    background: #fff;
+    color: #ca53d7;
     font-size: 14px;
     font-weight: 700;
   }
@@ -166,7 +161,6 @@ export const DayItem = styled.main`
   button:hover {
     cursor: pointer;
   }
-
 `;
 
 export const Modal = styled.div`
@@ -179,15 +173,13 @@ export const Modal = styled.div`
   left: 0;
   top: 0;
 
-  background-color: rgba(0,0,0,.4);
+  background-color: rgba(0, 0, 0, 0.4);
 
   align-items: center;
   justify-content: center !important;
 
-
   span {
-
-    background-color: #FFF;
+    background-color: #fff;
     padding: 24px;
     border-radius: 8px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -198,14 +190,13 @@ export const Modal = styled.div`
     }
 
     div {
-
       justify-content: center;
       margin-top: 17px;
 
       button {
-        color: #CA53D7;
+        color: #ca53d7;
         background-color: transparent;
-        border:0;
+        border: 0;
         font-weight: 500;
 
         font-size: 16px;
@@ -214,10 +205,6 @@ export const Modal = styled.div`
       button + button {
         margin-left: 20px;
       }
-
     }
-
-
   }
-
-`
+`;

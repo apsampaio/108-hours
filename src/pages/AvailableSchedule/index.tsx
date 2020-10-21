@@ -1,11 +1,19 @@
 import React, { useCallback, useState } from 'react';
 import { isEqual } from 'date-fns';
 
+import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 
 import api from '../../services/api';
 
-import { Container, SelectDate, SelectTime, Spacer, Button } from './styles';
+import {
+  Container,
+  SelectDate,
+  SelectTime,
+  Spacer,
+  Button,
+  Modal,
+} from './styles';
 import { useAuth } from '../../hooks/Auth';
 import { useSchedule } from '../../hooks/Schedule';
 
@@ -16,11 +24,21 @@ interface ISelectedSchedule {
 
 const AvailableSchedule: React.FC = () => {
   const { updateUserInfo } = useAuth();
+  const history = useHistory();
 
   const { availableSchedule: availableTimes } = useSchedule();
-  const [scheduleItems, setScheduleItems] = useState<ISelectedSchedule[]>([
-    { day: availableTimes[0].day, time: availableTimes[0].times[0].time },
-  ]);
+
+  const [modalVisibility, setModalVisibility] = useState(false);
+  const [scheduleItems, setScheduleItems] = useState<ISelectedSchedule[]>(
+    () => {
+      if (availableTimes) {
+        return [
+          { day: availableTimes[0].day, time: availableTimes[0].times[0].time },
+        ];
+      }
+      return [];
+    },
+  );
 
   const addNewScheduleItem = useCallback(() => {
     setScheduleItems([
@@ -56,15 +74,28 @@ const AvailableSchedule: React.FC = () => {
     );
 
     Promise.all(promises).then(() => {
-      updateUserInfo();
+      setModalVisibility(true);
+      setTimeout(() => {
+        setModalVisibility(false);
+        history.push('/profile');
+        updateUserInfo();
+      }, 2000);
     });
-  }, [scheduleItems, updateUserInfo]);
+  }, [history, scheduleItems, updateUserInfo]);
 
   return (
     <Container>
       <Header />
 
       <main>
+        {modalVisibility && (
+          <Modal>
+            <span>
+              <p>O seu agendamento foi realizado com sucesso!</p>
+            </span>
+          </Modal>
+        )}
+
         <header>
           <div>
             <span>Horários disponíveis</span>
