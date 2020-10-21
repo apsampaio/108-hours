@@ -32,6 +32,9 @@ interface StatesRequestInterface {
 const SignUp: React.FC = () => {
   const { signIn } = useAuth();
   const history = useHistory();
+
+  const [loading, setLoading] = useState(false);
+
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const [countries, setCountries] = useState<IStatesInterface[]>([]);
@@ -45,7 +48,7 @@ const SignUp: React.FC = () => {
 
   useEffect(() => {
     axios.get('https://restcountries.eu/rest/v2/all').then(({ data }) => {
-      const countries = data.map(
+      const response = data.map(
         ({ translations, alpha3Code }: ICountriesRequestInterface) => {
           return {
             label: translations.br,
@@ -54,29 +57,29 @@ const SignUp: React.FC = () => {
         },
       );
 
-      setCountries(countries);
+      setCountries(response);
     });
   }, []);
 
   useEffect(() => {
     statesApi.get('/').then(({ data }) => {
-      const states = data.map(({ id, nome }: StatesRequestInterface) => ({
+      const response = data.map(({ id, nome }: StatesRequestInterface) => ({
         value: id,
         label: nome,
       }));
 
-      setStates(states);
+      setStates(response);
     });
   }, []);
 
   useEffect(() => {
     statesApi.get(`/${selectedState}/municipios`).then(({ data }) => {
-      const cities = data.map(({ id, nome }: StatesRequestInterface) => ({
+      const response = data.map(({ nome }: StatesRequestInterface) => ({
         label: nome,
         value: nome,
       }));
 
-      setCities(cities);
+      setCities(response);
     });
   }, [selectedState]);
 
@@ -102,6 +105,7 @@ const SignUp: React.FC = () => {
 
   const handleSubmitForm = useCallback(
     ({ name, email, password, phone }) => {
+      setLoading(true);
       const user = {
         name,
         email,
@@ -122,7 +126,10 @@ const SignUp: React.FC = () => {
         })
         .catch(({ response }) => {
           alert(response.data.error);
-          //TODO better error handling
+          // TODO better error handling
+        })
+        .finally(() => {
+          setLoading(false);
         });
     },
     [selectedCountry, selectedCity, selectedState, countries, signIn, states],
@@ -176,7 +183,7 @@ const SignUp: React.FC = () => {
                     />
                   )
               }
-            ></Input>
+            />
 
             <Select
               value={selectedCountry}
@@ -188,7 +195,7 @@ const SignUp: React.FC = () => {
             />
 
             <Select
-              value={selectedState ? selectedState : ''}
+              value={selectedState || ''}
               disabled={selectedCountry !== 'BRA'}
               label="Selecione um estado"
               options={states}
@@ -205,7 +212,9 @@ const SignUp: React.FC = () => {
               onChange={handleSelectCity}
             />
 
-            <button type="submit">Concluir cadastro</button>
+            <button type="submit">
+              {loading ? 'Aguarde...' : 'Concluir cadastro'}
+            </button>
           </Form>
         </div>
       </Content>
