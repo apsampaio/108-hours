@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { Link } from 'react-router-dom';
 
 import noScheduleImg from '../../assets/noSchedule.svg';
 

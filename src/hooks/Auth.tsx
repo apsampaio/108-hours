@@ -20,18 +20,18 @@ export interface IAppointment {
 }
 
 interface IUserProps {
-  id: string,
-  name: string,
-  email: string,
-  phone: string,
-  country: string,
-  state: string,
-  city: string,
-  isAdmin: boolean,
-  avatar: string,
-  created_at: Date,
-  updated_at: Date,
-  appointments: IAppointment[]
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  country: string;
+  state: string;
+  city: string;
+  isAdmin: boolean;
+  avatar: string;
+  created_at: Date;
+  updated_at: Date;
+  appointments: IAppointment[];
 }
 
 interface IAuthState {
@@ -39,74 +39,77 @@ interface IAuthState {
   user: IUserProps;
 }
 
-const AuthContext = createContext({} as IAuthContextData)
-
+const AuthContext = createContext({} as IAuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<IAuthState>(() => {
-    const token = localStorage.getItem('@108hours:token')
-    const user = localStorage.getItem('@108hours:user')
+    const token = localStorage.getItem('@108hours:token');
+    const user = localStorage.getItem('@108hours:user');
 
     if (token && user) {
       api.defaults.headers.authorization = `Bearer ${token}`;
 
-      const parsedUser = JSON.parse(user)
-      return { token, user: parsedUser }
+      const parsedUser = JSON.parse(user);
+      return { token, user: parsedUser };
     }
 
-    return {} as IAuthState
-
-  })
+    return {} as IAuthState;
+  });
 
   const signIn = useCallback(async ({ email, password }) => {
-    api.post('sessions', { email, password }).then((response) => {
-      const { user, token } = response.data
+    api
+      .post('sessions', { email, password })
+      .then(response => {
+        const { user, token } = response.data;
 
-      localStorage.setItem('@108hours:token', token)
-      localStorage.setItem('@108hours:user', JSON.stringify(user))
+        localStorage.setItem('@108hours:token', token);
+        localStorage.setItem('@108hours:user', JSON.stringify(user));
 
-      api.defaults.headers.authorization = `Bearer ${token}`;
+        api.defaults.headers.authorization = `Bearer ${token}`;
 
-      setData({ user, token })
-    }).catch((response) => {
-
-      console.log("Error when authenticating")
-      console.log(response)
-    })
-    //TODO error handling
-  }, [])
+        setData({ user, token });
+      })
+      .catch(response => {
+        console.log('Error when authenticating');
+        console.log(response);
+      });
+    // TODO error handling
+  }, []);
 
   const signOut = useCallback(async () => {
-    localStorage.removeItem('@108hours:token')
-    localStorage.removeItem('@108hours:user')
+    localStorage.removeItem('@108hours:token');
+    localStorage.removeItem('@108hours:user');
 
-    setData({} as IAuthState)
-  }, [])
+    setData({} as IAuthState);
+  }, []);
 
   const updateUserInfo = useCallback(async () => {
-    const response = await api.get('users')
+    const response = await api.get('users');
 
-    const { user, token } = response.data
+    const { user, token } = response.data;
 
-    localStorage.setItem('@108hours:user', JSON.stringify(user))
+    localStorage.setItem('@108hours:user', JSON.stringify(user));
 
-    setData({ user, token })
-  }, [])
+    setData({ user, token });
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut, updateUserInfo }}>
+    <AuthContext.Provider
+      value={{ user: data.user, signIn, signOut, updateUserInfo }}
+    >
       {children}
-    </AuthContext.Provider>)
-}
+    </AuthContext.Provider>
+  );
+};
 
 function useAuth() {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider')
+    throw new Error('useAuth must be used within an AuthProvider');
   }
 
-  return context
+  return context;
 }
 
-export { AuthProvider, useAuth }
+export { AuthProvider, useAuth };

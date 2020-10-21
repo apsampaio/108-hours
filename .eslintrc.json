@@ -68,7 +68,9 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "camelcase": "off",
+    "react/jsx-indent": "off"
   },
   "settings": {
     "import/resolver": {

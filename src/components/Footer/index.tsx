@@ -1,12 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import { Container } from "./styles";
+import { HiPhone } from 'react-icons/hi';
+import { AiFillYoutube, AiOutlineInstagram } from 'react-icons/ai';
+import { SiFacebook } from 'react-icons/si';
+import { Container } from './styles';
 
-import { HiPhone } from "react-icons/hi";
-import { AiFillYoutube, AiOutlineInstagram } from "react-icons/ai";
-import { SiFacebook } from "react-icons/si";
-
-import logoImg from "../../assets/logo.svg";
+import logoImg from '../../assets/logo.svg';
 
 const Footer: React.FC = () => {
   return (
@@ -28,15 +27,18 @@ const Footer: React.FC = () => {
         </p>
       </div>
       <div>
-        <a href="https://www.youtube.com/channel/UCVLXWO4ZmKdUjuiJCVhKg7Q" target='blank'>
+        <a
+          href="https://www.youtube.com/channel/UCVLXWO4ZmKdUjuiJCVhKg7Q"
+          target="blank"
+        >
           <AiFillYoutube color="#CA53D7" size={24} />
           Nosso canal do Youtube
         </a>
-        <a href="/" target='blank'>
+        <a href="/" target="blank">
           <AiOutlineInstagram color="#CA53D7" size={24} />
           @amor.movimento
         </a>
-        <a href='https://www.facebook.com/AmorMov/' target='blank'>
+        <a href="https://www.facebook.com/AmorMov/" target="blank">
           <SiFacebook color="#CA53D7" size={24} />
           https://www.facebook.com/AmorMov/
         </a>

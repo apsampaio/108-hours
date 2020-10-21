@@ -1,25 +1,28 @@
-import React, { useCallback, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { Form } from "@unform/web";
-import { FiEye, FiEyeOff } from "react-icons/fi";
-import { HiCheck } from "react-icons/hi";
-import { FormHandles } from "@unform/core";
+import React, { useCallback, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Form } from '@unform/web';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { HiCheck } from 'react-icons/hi';
+import { FormHandles } from '@unform/core';
 
-import { useAuth } from "../../hooks/Auth";
+import { useAuth } from '../../hooks/Auth';
 
-import Input from "../../components/Input";
+import Input from '../../components/Input';
 
-import { Container, Banner, Content, Button } from "./styles";
+import { Container, Banner, Content, Button } from './styles';
 
 const Login: React.FC = () => {
-  const { signIn } = useAuth()
-  const formRef = useRef<FormHandles>(null)
+  const { signIn } = useAuth();
+  const formRef = useRef<FormHandles>(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [remindme, setRemindme] = useState(false);
 
-  const handleSubmit = useCallback(async ({ email, password }) => {
-    await signIn({ email, password })
-  }, [signIn])
+  const handleSubmit = useCallback(
+    async ({ email, password }) => {
+      await signIn({ email, password });
+    },
+    [signIn],
+  );
   return (
     <Container>
       <Banner>
@@ -33,22 +36,24 @@ const Login: React.FC = () => {
           <h1>Fazer login</h1>
           <Input placeholder="E-mail" name="email" />
           <Input
-            name='password'
-            type={passwordVisible ? "text" : "password"}
+            name="password"
+            type={passwordVisible ? 'text' : 'password'}
             placeholder="Senha"
-            icon={passwordVisible ? (
-              <FiEyeOff
-                onClick={() => setPasswordVisible(!passwordVisible)}
-                color="#9C98A6"
-                size={24}
-              />
-            ) : (
-                <FiEye
+            icon={
+              passwordVisible ? (
+                <FiEyeOff
                   onClick={() => setPasswordVisible(!passwordVisible)}
                   color="#9C98A6"
                   size={24}
                 />
-              )}
+              ) : (
+                  <FiEye
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                    color="#9C98A6"
+                    size={24}
+                  />
+                )
+            }
           />
 
           <label>
@@ -60,7 +65,7 @@ const Login: React.FC = () => {
             />
             Lembrar-me
           </label>
-          <Button type='submit'>Entrar</Button>
+          <Button type="submit">Entrar</Button>
           <p>
             Não tem conta? <Link to="/signup">Cadastre-se</Link>
           </p>
