@@ -3,6 +3,8 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import api from '../services/api';
 import { groupByDay } from '../util/appointmentsHelper';
 
+import socket from '../services/socket';
+
 interface ActivePeriod {
   start: Date;
   end: Date;
@@ -51,6 +53,7 @@ const ScheduleProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     api.get('/appointments/available').then(response => {
+      console.log(response.data.availableAppointments);
       setData({
         availableSchedule: groupByDay(response.data.availableAppointments),
       });
@@ -70,6 +73,14 @@ const ScheduleProvider: React.FC = ({ children }) => {
         start,
         end,
         formatedActivePeriod,
+      });
+    });
+  }, [activePeriod.start, months]);
+
+  useEffect(() => {
+    socket.on('newAppointments', (appointments: string[]) => {
+      setData({
+        availableSchedule: groupByDay(appointments),
       });
     });
   }, []);
