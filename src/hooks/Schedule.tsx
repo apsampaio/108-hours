@@ -24,11 +24,10 @@ const ScheduleProvider: React.FC = ({ children }) => {
   useEffect(() => {
     api.get('/appointments/available').then(response => {
       setData({
-        ...data,
         availableSchedule: groupByDay(response.data.availableAppointments),
       });
     });
-  }, [data]);
+  }, []);
 
   return (
     <ScheduleContext.Provider

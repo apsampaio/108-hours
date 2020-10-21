@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import CustomButton from '../../components/Button';
 
 export const Container = styled.div`
   display: flex;
@@ -64,4 +65,9 @@ export const Content = styled.div`
     display: flex;
     align-items: left;
   }
+`;
+
+export const Button = styled(CustomButton)`
+  max-width: 250px;
+  margin: 64px 64px auto;
 `;

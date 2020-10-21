@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import download from 'downloadjs';
 import { format } from 'date-fns';
 
 import Footer from '../../components/Footer';
@@ -6,7 +7,7 @@ import Header from '../../components/Header';
 import Table from '../../components/Table/index.jsx';
 import api from '../../services/api';
 
-import { Container, Content } from './styles';
+import { Container, Content, Button } from './styles';
 
 interface IResponse {
   user: {
@@ -40,6 +41,76 @@ const AdminShowPickedSchedules: React.FC = () => {
     // });
 
     const data = [
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
+      {
+        user_name: 'Giusto Eley',
+        email: 'geley0@dion.ne.jp',
+        schedule_time: '7/4/2020',
+      },
       {
         user_name: 'Giusto Eley',
         email: 'geley0@dion.ne.jp',
@@ -120,12 +191,29 @@ const AdminShowPickedSchedules: React.FC = () => {
     setAppointments(data);
   }, []);
 
+  const handleDownloadTXT = useCallback(() => {
+    api
+      .get('report', { responseType: 'arraybuffer' })
+      .then(response => {
+        const blob = new Blob([response.data], {
+          type:
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        });
+
+        download(blob, 'planilha de horários.xlsx');
+      })
+      .catch(() => {
+        // TODO error handling
+      });
+  }, []);
+
   return (
     <Container>
       <Header />
       <Content>
         <strong>Tabela de horários preenchidos</strong>
 
+        <Button onClick={handleDownloadTXT} name="Baixar tabela .txt" />
         <section>
           <Table data={appointments} />
         </section>
