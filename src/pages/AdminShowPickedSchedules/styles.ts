@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import CustomButton from '../../components/Button';
 
+
+// TODO Table style
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -65,6 +68,22 @@ export const Content = styled.div`
     display: flex;
     align-items: left;
   }
+
+  @media(max-width: 800px) {
+    min-width: 80vw;
+    table {
+      margin: 0;
+
+      tbody td {
+        text-overflow: ellipsis ;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+    }
+
+  }
+
 `;
 
 export const Button = styled(CustomButton)`

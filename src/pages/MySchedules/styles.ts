@@ -83,11 +83,32 @@ export const Content = styled.div`
 
     color: #333333;
   }
+
+  @media(max-width: 800px) {
+    min-width: 90vw;
+  }
+
 `;
 
 export const DayList = styled.ul`
   display: flex;
   flex-direction: column;
+
+  button {
+    padding: 10px 35px;
+
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: #ca53d7;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
 `;
 
 export const DayItem = styled.main`
@@ -142,25 +163,7 @@ export const DayItem = styled.main`
     }
   }
 
-  button {
-    position: absolute;
-    padding: 0px 35px;
 
-    height: 30px;
-
-    bottom: -15px;
-    left: calc(50% - 70px);
-
-    border: 0;
-    background: #fff;
-    color: #ca53d7;
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  button:hover {
-    cursor: pointer;
-  }
 `;
 
 export const Modal = styled.div`

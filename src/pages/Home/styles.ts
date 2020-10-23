@@ -47,4 +47,15 @@ export const Content = styled.div`
       }
     }
   }
+
+  @media(max-width: 800px) {
+
+    max-width: 90vw;
+
+    section {
+      padding: 33px;
+    }
+
+  }
+
 `;

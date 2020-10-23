@@ -8,8 +8,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
 
-  div {
+  @media(max-width: 800px) {
+    flex-direction: column;
   }
+
 `;
 
 export const Menu = styled.div`
@@ -36,6 +38,20 @@ export const Menu = styled.div`
   a + a {
     margin-left: 160px;
   }
+
+  @media(max-width: 800px) {
+
+    margin-bottom: 25px;
+
+    a {
+      padding: 15px;
+    }
+
+    a + a {
+      margin-left: 0px;
+    }
+  }
+
 `;
 
 export const Dropdown = styled.section`
@@ -116,6 +132,18 @@ export const Dropdown = styled.section`
 
     a:last-of-type {
       border-top: 0.5px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @media(max-width: 800px) {
+
+    max-width: 100vw;
+    min-height: 70px;
+
+    div {
+      span {
+        display: none;
+      }
     }
   }
 `;

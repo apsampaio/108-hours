@@ -89,12 +89,13 @@ const MySchedules: React.FC = () => {
                   </span>
                 ))}
               </span>
-              <button type="button" onClick={handleClickDelete}>
-                Excluir horário
-              </button>
             </DayItem>
           ))}
+          <button type="button" onClick={handleClickDelete}>
+            Excluir horários
+          </button>
         </DayList>
+
         {modalVisibility && (
           <Modal>
             <span>

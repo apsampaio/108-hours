@@ -68,13 +68,13 @@ export const Content = styled.div`
 
     form {
       /* background-color:blue; */
-      
+
       display:flex;
       justify-content:space-evenly;
       align-items:center;
     }
 
-    form + button {      
+    form + button {
       position:absolute;
       right: 64px;
       bottom:32px;
@@ -90,5 +90,29 @@ export const Content = styled.div`
       color:#fff;
     }
   }
-  
+
+  @media(max-width: 800px) {
+    min-width: 90vw;
+
+    strong {
+      padding-left: 32px;
+    }
+
+    span {
+      margin-left: 32px;
+    }
+
+    section {
+      form {
+        flex-direction: column;
+      }
+
+      form + button {
+        position: relative;
+        margin: 45px 0px 0px 45px;
+      }
+    }
+
+  }
+
 `;

@@ -40,4 +40,8 @@ export const Container = styled.div`
       align-items: center;
     }
   }
+
+  @media(max-width: 800px) {
+    flex-direction: column;
+  }
 `;
