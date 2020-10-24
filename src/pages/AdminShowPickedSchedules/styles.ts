@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import CustomButton from '../../components/Button';
 
 
-// TODO Table style
 
 export const Container = styled.div`
   display: flex;
@@ -73,13 +72,7 @@ export const Content = styled.div`
     min-width: 80vw;
     table {
       margin: 0;
-
-      tbody td {
-        text-overflow: ellipsis ;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-
+      margin-top: 15px;
     }
 
   }
