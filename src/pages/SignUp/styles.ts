@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -39,11 +39,9 @@ export const Banner = styled.div`
     }
   }
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     display: none;
   }
-
-
 `;
 
 export const Content = styled.div`
@@ -56,7 +54,6 @@ export const Content = styled.div`
     justify-content: center;
     align-items: center;
     form {
-
       min-width: 352px;
       display: flex;
       flex-direction: column;
@@ -70,7 +67,7 @@ export const Content = styled.div`
       p {
         color: #333333;
         font-size: 18px;
-        font-family: "Roboto";
+        font-family: 'Roboto';
         width: 250px;
         margin-bottom: 40px;
 
@@ -96,13 +93,13 @@ export const Content = styled.div`
         margin: 0px;
         height: fit-content;
         background: transparent;
-        color: #CA53D7;
+        color: #ca53d7;
         margin-bottom: 36px;
       }
     }
   }
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     div {
       form {
         max-width: 80vw;
@@ -112,7 +109,6 @@ export const Content = styled.div`
       }
     }
   }
-
 `;
 
 export const PasswordInputContainer = styled.div`

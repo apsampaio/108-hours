@@ -23,8 +23,6 @@ interface ITableData {
   schedule_time: string;
 }
 
-// TODO Download data button to be added
-
 const AdminShowPickedSchedules: React.FC = () => {
   const [appointments, setAppointments] = useState<ITableData[]>([]);
 
