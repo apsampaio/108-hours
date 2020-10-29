@@ -105,3 +105,13 @@ export function groupByDayWithId(
 
   return sortedAppointments;
 }
+
+export function formatTimes(unformattedTimes: IAppointment[]): string[] {
+  return unformattedTimes.map(
+    appointment =>
+      `${week_days[getDay(new Date(appointment.date))]}, ${format(
+        new Date(appointment.date),
+        'dd/MM, HH:00',
+      )}`,
+  );
+}

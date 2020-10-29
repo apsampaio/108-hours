@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface EachDayProps {
+  selected: boolean;
+}
 
 export const Container = styled.div`
   display: flex;
@@ -84,10 +88,9 @@ export const Content = styled.div`
     color: #333333;
   }
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     min-width: 90vw;
   }
-
 `;
 
 export const DayList = styled.ul`
@@ -108,7 +111,6 @@ export const DayList = styled.ul`
   button:hover {
     cursor: pointer;
   }
-
 `;
 
 export const DayItem = styled.main`
@@ -147,23 +149,7 @@ export const DayItem = styled.main`
 
     padding-top: 12px;
     padding-left: 15px;
-
-    span {
-      font-size: 16px;
-      color: #fffcfe;
-      background: #4a2787;
-
-      padding: 15px 20px;
-      border: 1px solid #4a2787;
-      border-radius: 8px;
-
-      margin-right: 24px;
-      margin-top: 12px;
-      cursor: pointer;
-    }
   }
-
-
 `;
 
 export const Modal = styled.div`
@@ -210,4 +196,26 @@ export const Modal = styled.div`
       }
     }
   }
+`;
+
+export const EachDay = styled.span<EachDayProps>`
+  font-size: 16px;
+  color: #fffcfe;
+  background: #4a2787;
+
+  padding: 15px 20px;
+  border: 1px solid #4a2787;
+  border-radius: 8px;
+
+  margin-right: 24px;
+  margin-top: 12px;
+  cursor: pointer;
+
+  ${props =>
+    props.selected &&
+    css`
+      border: 2px solid #4a2787;
+      color: #6a6180;
+      background: #fff;
+    `}
 `;

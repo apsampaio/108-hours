@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { isWithinInterval } from 'date-fns';
 
 import { Link } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
@@ -9,13 +10,16 @@ import noScheduleImg from '../../assets/noSchedule.svg';
 
 import { useAuth, IAppointment } from '../../hooks/Auth';
 
-import { Container, Content, DayList, DayItem, Modal } from './styles';
-import { groupByDayWithId } from '../../util/appointmentsHelper';
+import { Container, Content, DayList, DayItem, Modal, EachDay } from './styles';
+import { groupByDayWithId, formatTimes } from '../../util/appointmentsHelper';
 import api from '../../services/api';
 import { useSchedule } from '../../hooks/Schedule';
 
 const MySchedules: React.FC = () => {
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
+  const [appointmentsToDelete, setAppointmentsToDelete] = useState<
+    IAppointment[]
+  >([]);
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const { user, updateUserInfo } = useAuth();
@@ -33,14 +37,47 @@ const MySchedules: React.FC = () => {
     setAppointments(user.appointments);
   }, [user]);
 
-  const handleDeleteAppointment = useCallback(
+  const formattedAppointmentsToDelete = useMemo(() => {
+    return formatTimes(appointmentsToDelete);
+  }, [appointmentsToDelete]);
+
+  const handleSelectAppointment = useCallback(
     (id: string) => {
-      // api.delete(`/appointments/${id}`).then(() => {
-      //   updateUserInfo()
-      // })
+      const foundAppointment = appointmentsToDelete.find(
+        appointment => appointment.id === id,
+      );
+
+      if (!foundAppointment) {
+        const appointmentToDelete = appointments.find(
+          appointment => appointment.id === id,
+        );
+        if (appointmentToDelete) {
+          setAppointmentsToDelete([
+            ...appointmentsToDelete,
+            appointmentToDelete,
+          ]);
+        }
+      } else {
+        setAppointmentsToDelete(
+          appointmentsToDelete.filter(appointment => appointment.id !== id),
+        );
+      }
     },
-    [updateUserInfo],
+    [appointments, appointmentsToDelete],
   );
+
+  const handleDeleteAppointments = useCallback(() => {
+    const promises: Promise<AxiosResponse>[] = [];
+    appointmentsToDelete.forEach(appointment => {
+      promises.push(api.delete(`/appointments/${appointment.id}`));
+    });
+
+    Promise.all(promises).then(() => {
+      setModalVisibility(false);
+      setAppointmentsToDelete([]);
+      updateUserInfo();
+    });
+  }, [appointmentsToDelete, updateUserInfo]);
 
   const handleClickDelete = useCallback(() => {
     setModalVisibility(true);
@@ -79,14 +116,19 @@ const MySchedules: React.FC = () => {
               <label>{formatedDay}</label>
               <span>
                 {times.map(({ formattedTime, time, id }) => (
-                  <span
+                  <EachDay
+                    selected={
+                      !!appointmentsToDelete.find(
+                        appointment => appointment.id === id,
+                      )
+                    }
                     onClick={() => {
-                      handleDeleteAppointment(id);
+                      handleSelectAppointment(id);
                     }}
                     key={time.toString()}
                   >
                     {formattedTime}
-                  </span>
+                  </EachDay>
                 ))}
               </span>
             </DayItem>
@@ -99,12 +141,19 @@ const MySchedules: React.FC = () => {
         {modalVisibility && (
           <Modal>
             <span>
-              <p>Tem certeza que deseja excluir este horário?</p>
-              <p>Segunda-feira, 13/10, 09:00</p>
+              {!appointmentsToDelete.length && (
+                <p>Selecione um horário para excluir!</p>
+              )}
+
+              {!!appointmentsToDelete.length && (
+                <p>Tem certeza que deseja excluir este(s) horário(s)?</p>
+              )}
+
+              {formattedAppointmentsToDelete.map(appointment => (
+                <p>{appointment}</p>
+              ))}
               <div>
-                <button onClick={() => setModalVisibility(false)}>
-                  Excluir
-                </button>
+                <button onClick={handleDeleteAppointments}>Excluir</button>
                 <button onClick={() => setModalVisibility(false)}>
                   Cancelar
                 </button>
