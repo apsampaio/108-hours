@@ -6,12 +6,9 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 import api, { statesApi } from '../../services/api';
 
-import Input from '../../components/Input';
-import Select from '../../components/Select';
-
 import { useAuth } from '../../hooks/Auth';
 
-import { Container, Banner, Content } from './styles';
+import { Container, Banner, Content, Input, Select } from './styles';
 import { useSchedule } from '../../hooks/Schedule';
 
 interface ICountriesRequestInterface {
@@ -170,12 +167,12 @@ const SignUp: React.FC = () => {
                     size={24}
                   />
                 ) : (
-                  <FiEye
-                    onClick={() => setPasswordVisible(!passwordVisible)}
-                    color="#9C98A6"
-                    size={24}
-                  />
-                )
+                    <FiEye
+                      onClick={() => setPasswordVisible(!passwordVisible)}
+                      color="#9C98A6"
+                      size={24}
+                    />
+                  )
               }
             />
 

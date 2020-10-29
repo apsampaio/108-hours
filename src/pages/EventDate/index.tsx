@@ -22,6 +22,7 @@ const EventDate: React.FC = () => {
       .post('/activeperiod', { start: startDate, end: endDate })
       .then(data => {
         console.log(data);
+        alert('Data do evento alterada com sucesso!');
       })
       .catch(({ response }) => {
         console.log(response.data.error);

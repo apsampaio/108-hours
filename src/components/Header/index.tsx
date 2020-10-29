@@ -1,39 +1,35 @@
-import React from "react";
-import { FiChevronDown } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { FiChevronDown } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
-import { useAuth } from "../../hooks/Auth";
+import { useAuth } from '../../hooks/Auth';
 
-import { Container, Menu, Dropdown } from "./styles";
-
+import { Container, Menu, Dropdown } from './styles';
 
 const Header: React.FC = () => {
-  const { signOut, user } = useAuth()
+  const { signOut, user } = useAuth();
 
   if (!user) {
     return (
-
       <Container>
         <Menu>
-          <Link to='/aboutus'>Quem somos</Link>
+          <Link to="/aboutus">Quem somos</Link>
         </Menu>
         <Dropdown>
           <div>
-            <Link to="/signin">Entrar</Link>
-           |
-           <Link to="/signup"> Cadastre-se</Link>
+            <Link to="/signin">Entrar</Link>|
+            <Link to="/signup"> Cadastre-se</Link>
           </div>
         </Dropdown>
       </Container>
-    )
+    );
   }
-
 
   return (
     <Container>
       <Menu>
-        <Link to='/schedule'>Horários</Link>
-        <Link to='/aboutus'>Quem somos</Link>
+        <Link to="/schedule">Horários</Link>
+        <Link to="/aboutus">Quem somos</Link>
       </Menu>
       <Dropdown>
         <div>
@@ -45,15 +41,16 @@ const Header: React.FC = () => {
         </div>
 
         <div>
-          <Link to='/profile'>Meus horários</Link>
+          <Link to="/profile">Meus horários</Link>
 
           {user.isAdmin && (
             <>
-              <Link to='/event-date'>Configurar horários</Link>
-              <Link  to='/all-schedule'>Tabela de horários preenchidos</Link>
+              <Link to="/event-date">Configurar horários</Link>
+              <Link to="/setup-aboutus">Configurar aboutus</Link>
+              <Link to="/all-schedule">Tabela de horários preenchidos</Link>
             </>
           )}
-          <a  onClick={signOut}>Sair</a>
+          <a onClick={signOut}>Sair</a>
         </div>
       </Dropdown>
     </Container>

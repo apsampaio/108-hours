@@ -1,10 +1,16 @@
 import styled from 'styled-components';
+import CustomInput from '../../components/Input';
+import CustomSelect from '../../components/Select';
 
 export const Container = styled.div`
   display: flex;
 
   width: 100vw;
   height: 100vh;
+
+  @media (max-width: 800px) {
+    justify-content: center;
+  }
 `;
 
 export const Banner = styled.div`
@@ -100,11 +106,15 @@ export const Content = styled.div`
   }
 
   @media (max-width: 800px) {
+    > div {
+      padding: 16px;
+    }
     div {
       form {
-        max-width: 80vw;
+        padding: 8px;
+
         select {
-          width: 90%;
+          width: 80%;
         }
       }
     }
@@ -136,3 +146,7 @@ export const PasswordInputContainer = styled.div`
     margin-left: 16px;
   }
 `;
+
+export const Input = styled(CustomInput)``;
+
+export const Select = styled(CustomSelect)``;

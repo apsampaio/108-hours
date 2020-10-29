@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface ContainerProps {
   isFocused: boolean;
@@ -15,11 +15,11 @@ export const Container = styled.div<ContainerProps>`
   position: relative;
   align-items: center;
 
-  ${(props) =>
+  ${props =>
     props.isFocused &&
     css`
       &::after {
-        content: "";
+        content: '';
         background: #ca53d7;
         position: absolute;
         bottom: 15%;

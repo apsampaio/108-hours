@@ -29,7 +29,9 @@ const Landing: React.FC = () => {
         <img src={landingImg} alt="Meditação" />
       </Content>
       <Footer>
-        <h2>Colabore com nossa jornada de cura !</h2>
+        <h2>
+          Colabore com nossa <br /> jornada de cura !
+        </h2>
         <p>Gratidão! Já temos um total de {appointments} orações agendadas.</p>
         <img src={heartImg} alt="Coração" />
         <Link to="/signin">Agende um horário</Link>

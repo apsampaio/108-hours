@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   background: rgba(202, 83, 215, 0.5);
@@ -8,10 +8,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     flex-direction: column;
   }
-
 `;
 
 export const Menu = styled.div`
@@ -26,7 +25,7 @@ export const Menu = styled.div`
     font-weight: 500;
     font-size: 20px;
     border-bottom: 5px solid transparent;
-    text-decoration:none;
+    text-decoration: none;
   }
 
   a:hover {
@@ -39,8 +38,7 @@ export const Menu = styled.div`
     margin-left: 160px;
   }
 
-  @media(max-width: 800px) {
-
+  @media (max-width: 800px) {
     margin-bottom: 25px;
 
     a {
@@ -51,7 +49,6 @@ export const Menu = styled.div`
       margin-left: 0px;
     }
   }
-
 `;
 
 export const Dropdown = styled.section`
@@ -60,12 +57,13 @@ export const Dropdown = styled.section`
   min-width: 300px;
   min-height: 100px;
   flex: 0;
+  z-index: 2;
 
-  a{
-    text-decoration:none;
-    color: #4A2787;
+  a {
+    text-decoration: none;
+    color: #4a2787;
     font-size: 20px;
-    margin:0 8px 0 8px;
+    margin: 0 8px 0 8px;
   }
 
   div {
@@ -73,7 +71,7 @@ export const Dropdown = styled.section`
 
     align-items: center;
     justify-content: center;
-    height:100%;
+    height: 100%;
 
     span {
       padding: 15px 20px 15px 20px;
@@ -110,9 +108,9 @@ export const Dropdown = styled.section`
   div + div {
     display: none;
     position: fixed;
-    min-width:300px;
+    min-width: 300px;
     z-index: 1;
-    height:fit-content;
+    height: fit-content;
 
     /* background-color: red; */
     background-color: #f0f0f7;
@@ -127,7 +125,7 @@ export const Dropdown = styled.section`
       font-size: 18px;
       cursor: pointer;
       color: #4a2787;
-      text-decoration:none;
+      text-decoration: none;
     }
 
     a:last-of-type {
@@ -135,8 +133,7 @@ export const Dropdown = styled.section`
     }
   }
 
-  @media(max-width: 800px) {
-
+  @media (max-width: 800px) {
     max-width: 100vw;
     min-height: 70px;
 

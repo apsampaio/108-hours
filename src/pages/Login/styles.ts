@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100vw;
@@ -40,10 +40,9 @@ export const Banner = styled.div`
     }
   }
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     display: none;
   }
-
 `;
 
 export const Content = styled.div`
@@ -97,7 +96,7 @@ export const Content = styled.div`
         background: #4a2787;
         border: 1px solid #4a2787;
       }
-    }    
+    }
   }
 
   p {
@@ -113,46 +112,21 @@ export const Content = styled.div`
     }
   }
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     width: 100vw;
-   
-   form {
-    min-width: 90vw;
-   }
 
+    form {
+      min-width: 90vw;
+    }
+
+    form p {
+      font-size: 12px;
+    }
   }
-
 `;
 
-// export const PasswordInputContainer = styled.div`
-//   background: #fafafc;
-//   padding: 24px;
-//   border: 1px solid #e6e6f0;
-//   border-radius: 0px 0px 8px 8px;
-//   color: #333333;
-//   display: flex;
-//   align-items: center;
-
-//   input {
-//     font-size: 16px;
-//     color: #333333;
-//     flex: 1;
-//     background: transparent;
-//     border: 0;
-//   }
-
-//   input::-webkit-input-placeholder {
-//     color: #9c98a6;
-//   }
-
-//   svg {
-//     margin-left: 16px;
-//     cursor: pointer;
-//   }
-// `;
-
 export const Button = styled.button`
-  background: #4A2787;
+  background: #4a2787;
   border-radius: 8px;
   height: 56px;
 
@@ -164,8 +138,12 @@ export const Button = styled.button`
   border: 0;
   margin-top: 40px;
   margin-bottom: 128px;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-`
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 800px) {
+    font-size: 14px;
+  }
+`;

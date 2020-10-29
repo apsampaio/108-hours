@@ -10,6 +10,7 @@ import MySchedules from '../pages/MySchedules';
 import SignUp from '../pages/SignUp';
 import AvailableSchedule from '../pages/AvailableSchedule';
 import AdminShowPickedSchedules from '../pages/AdminShowPickedSchedules';
+import SetupAboutUs from '../pages/SetupAboutUs';
 
 const Routes: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const Routes: React.FC = () => {
         isPrivate
         component={AdminShowPickedSchedules}
       />
+      <Route path="/setup-aboutus" exact isPrivate component={SetupAboutUs} />
       <Route path="/event-date" exact isPrivate component={EventDate} />
       <Route path="/profile" isPrivate component={MySchedules} />
       <Route path="/schedule" isPrivate component={AvailableSchedule} />
